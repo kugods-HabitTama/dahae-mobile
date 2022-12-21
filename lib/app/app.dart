@@ -67,8 +67,8 @@ class DahaeApp extends StatelessWidget {
   );
 
   final ThemeData _theme = ThemeData(
-    backgroundColor: const Color.fromARGB(0xFF, 0xF5, 0xEF, 0xFF),
-    primaryColor: const Color.fromARGB(0xFF, 0xD3, 0xBF, 0xF9),
-    highlightColor: const Color.fromARGB(0xFF, 0x92, 0x5F, 0xF0),
+    backgroundColor: const Color(0xFFF5EFFF),
+    primaryColor: const Color(0xFFD3BFF9),
+    highlightColor: const Color(0xFF925FF0),
   );
 }
