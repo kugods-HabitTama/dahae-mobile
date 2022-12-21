@@ -38,12 +38,12 @@ class NavBar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           IconButton(
-            onPressed: () => GoRouter.of(context).go('/todo'),
+            onPressed: () => GoRouter.of(context).go('/habit'),
             icon: const Icon(Icons.calendar_month),
             enableFeedback: false,
           ),
           IconButton(
-            onPressed: () => GoRouter.of(context).go('/tama'),
+            onPressed: () => GoRouter.of(context).go('/pet'),
             icon: const Icon(Icons.pets),
             enableFeedback: false,
           ),
