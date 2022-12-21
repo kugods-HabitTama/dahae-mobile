@@ -4,5 +4,6 @@
 
 intl (Date formatting)  
 go_router (Routing)  
-http (or dio) (networking)  
+dio (networking)
+freezed, json_serialization
 localstorage (auth information)  
