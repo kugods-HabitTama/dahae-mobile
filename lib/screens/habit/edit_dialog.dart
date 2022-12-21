@@ -29,14 +29,13 @@ class _EditDialogState extends State<EditDialog> {
     return Container(
       padding: EdgeInsets.all(8.0),
       decoration: BoxDecoration(
+        border:
+            Border.all(width: 2, color: Theme.of(context).bottomAppBarColor),
         color: Theme.of(context).backgroundColor,
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Text("Title"),
-          Text("Day"),
-          Text("Info"),
           Align(
             alignment: Alignment.topRight,
             child: IconButton(
@@ -46,6 +45,13 @@ class _EditDialogState extends State<EditDialog> {
               icon: const Icon(Icons.close),
             ),
           ),
+          TextField(
+            decoration: InputDecoration(
+              hintText: "해빗 네임",
+            ),
+          ),
+          Text("Day"),
+          Text("Info"),
         ],
       ),
     );
