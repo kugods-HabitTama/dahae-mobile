@@ -57,11 +57,9 @@ class _EditDialogState extends State<EditDialog> {
   contentBox(context) {
     return Container(
       width: 200,
-      padding: EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(8.0),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(
-          Radius.circular(10.0),
-        ),
+        borderRadius: const BorderRadius.all(Radius.circular(10.0)),
         color: Theme.of(context).backgroundColor,
       ),
       child: Column(
@@ -90,7 +88,7 @@ class _EditDialogState extends State<EditDialog> {
                   "실천 요일 *",
                   style: Theme.of(context).textTheme.bodyText2,
                 ),
-                Text("m t w t"),
+                const Text("M T W T F S S"),
               ],
             ),
           ),
@@ -129,13 +127,15 @@ class _EditDialogState extends State<EditDialog> {
                     textBox(context, 100.0, 0.0),
                   ],
                 ),
-                Row(children: [
-                  textBox(context, 140.0, 10.0),
-                  CupertinoSwitch(
-                    value: timeSet,
-                    onChanged: (value) => setState(() => timeSet = !timeSet),
-                  )
-                ])
+                Row(
+                  children: [
+                    textBox(context, 140.0, 10.0),
+                    CupertinoSwitch(
+                      value: timeSet,
+                      onChanged: (value) => setState(() => timeSet = !timeSet),
+                    )
+                  ],
+                )
               ],
             ),
           ),
