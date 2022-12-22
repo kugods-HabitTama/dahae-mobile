@@ -7,6 +7,8 @@ part 'habit.g.dart';
 
 @freezed
 class Habit with _$Habit {
+  const Habit._();
+
   const factory Habit({
     required int id,
     required String title,
@@ -16,40 +18,35 @@ class Habit with _$Habit {
     @TimeStringToTimeOfDayConverter() required TimeOfDay time,
     @DateStringToDateTimeConverter() required DateTime startDate,
     @DateStringToDateTimeConverter() required DateTime endDate,
-    @DayStringToIntConverter() required List<int> days,
+    required List<DayOfWeek> days,
   }) = _Habit;
 
   factory Habit.fromJson(Map<String, Object?> json) => _$HabitFromJson(json);
+
+  String get daysToString => days.map((e) => e.korean).join(', ');
 }
 
-final Map<String, int> dayToIdx = {
-  'Mon': 1,
-  'Tue': 2,
-  'Wed': 3,
-  'Thu': 4,
-  'Fri': 5,
-  'Sat': 6,
-  'Sun': 7
-};
+@JsonEnum()
+enum DayOfWeek {
+  @JsonValue('Mon')
+  mon,
+  @JsonValue('Tue')
+  tue,
+  @JsonValue('Web')
+  wed,
+  @JsonValue('Tue')
+  thu,
+  @JsonValue('Fri')
+  fri,
+  @JsonValue('Sat')
+  sat,
+  @JsonValue('Sun')
+  sun;
 
-final Map<int, String> idxToDay = {
-  1: 'Mon',
-  2: 'Tue',
-  3: 'Wed',
-  4: 'Thu',
-  5: 'Fri',
-  6: 'Sat',
-  7: 'Sun'
-};
+  static final List<String> _korean = ['월', '화', '수', '목', '금', '토', '일']; 
 
-class DayStringToIntConverter implements JsonConverter<int, String> {
-  const DayStringToIntConverter();
-
-  @override
-  int fromJson(String day) => dayToIdx[day]!;
-
-  @override
-  String toJson(int idx) => idxToDay[idx]!;
+  int get day => index + 1; // 월요일 1 ~ 일요일 7 (DateTime 기준)
+  String get korean => _korean[index];
 }
 
 class DateStringToDateTimeConverter implements JsonConverter<DateTime, String> {

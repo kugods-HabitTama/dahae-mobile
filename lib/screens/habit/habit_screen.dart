@@ -1,3 +1,5 @@
+import 'package:dahae_mobile/models/habit.dart';
+import 'package:dahae_mobile/repos/habit_repo.dart';
 import 'package:flutter/material.dart';
 
 import 'all_habit_dropdown.dart';
@@ -14,16 +16,9 @@ class HabitScreen extends StatefulWidget {
 }
 
 class _HabitScreenState extends State<HabitScreen> {
-  final _mockData = Future<List<String>>.delayed(
+  final _mockData = Future<List<Habit>>.delayed(
     const Duration(seconds: 3),
-    () => [
-      "habit_title",
-      "habit_title",
-      "habit_title",
-      "habit_title",
-      "habit_title",
-      "habit_title",
-    ],
+    () => HabitRepo.habitList,
   );
 
   @override
@@ -41,7 +36,7 @@ class _HabitScreenState extends State<HabitScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: snapshot.data!
-                          .map((e) => HabitRecordTile(title: e))
+                          .map((e) => HabitRecordTile(habit: e))
                           .toList(),
                     ),
                   );

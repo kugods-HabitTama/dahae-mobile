@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:dahae_mobile/models/habit.dart';
 
 abstract class HabitRepo {
-  static List<Habit> habitList = [
+  static final List<Habit> habitList = [
     Habit.fromJson(jsonDecode(
         '{"id":0,"title":"title0","action":"string0000","value":0,"unit":"stri0ng","time":"10:10","startDate":"2022-12-10","endDate":"2022-12-21","days":["Mon"]}')),
     Habit.fromJson(jsonDecode(
