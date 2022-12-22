@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -12,7 +14,7 @@ class Header extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 180,
+      //height: 180,
       decoration: BoxDecoration(
         borderRadius:
             const BorderRadius.vertical(bottom: Radius.circular(20.0)),
@@ -28,71 +30,158 @@ class Header extends StatelessWidget {
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-            ), // 상태바 높이 패딩
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      '안녕하세요 !',
-                      textAlign: TextAlign.left,
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                    ),
-                    Text.rich(
-                      TextSpan(
-                        children: [
-                          const TextSpan(
-                            text: '오늘도 힘차게 ',
-                            style: TextStyle(
-                                fontSize: 22, fontWeight: FontWeight.bold),
-                          ),
-                          TextSpan(
-                            text: '다해 ',
-                            style: TextStyle(
-                                fontSize: 22,
-                                fontWeight: FontWeight.bold,
-                                color: Theme.of(context).highlightColor),
-                          ),
-                          const TextSpan(
-                            text: '볼까요?',
-                            style: TextStyle(
-                                fontSize: 22, fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Text(
-                      DateFormat('yyyy년 MM월 dd일').format(DateTime.now()),
-                      textAlign: TextAlign.left,
-                    ),
-                  ],
-                ),
-                const Image(image: AssetImage('assets/images/logo.png'))
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Text('월'),
-                Text('화'),
-                Text('수'),
-                Text('목'),
-                Text('금'),
-                Text('토'),
-                Text('일'),
-              ],
-            )
-          ],
-        ),
+        child: headerContent(context)
       ),
     );
+  }
+
+        // Column(
+        //   crossAxisAlignment: CrossAxisAlignment.start,
+        //   children: [
+        //     Padding(
+        //       padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+        //     ), // 상태바 높이 패딩
+        //     Row(
+        //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //       children: [
+        //         Column(
+        //           crossAxisAlignment: CrossAxisAlignment.start,
+        //           children: [
+        //             const Text(
+        //               '안녕하세요 !',
+        //               textAlign: TextAlign.left,
+        //               style:
+        //                   TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        //             ),
+        //             Text.rich(
+        //               TextSpan(
+        //                 children: [
+        //                   const TextSpan(
+        //                     text: '오늘도 힘차게 ',
+        //                     style: TextStyle(
+        //                         fontSize: 22, fontWeight: FontWeight.bold),
+        //                   ),
+        //                   TextSpan(
+        //                     text: '다해 ',
+        //                     style: TextStyle(
+        //                         fontSize: 22,
+        //                         fontWeight: FontWeight.bold,
+        //                         color: Theme.of(context).highlightColor),
+        //                   ),
+        //                   const TextSpan(
+        //                     text: '볼까요?',
+        //                     style: TextStyle(
+        //                         fontSize: 22, fontWeight: FontWeight.bold),
+        //                   ),
+        //                 ],
+        //               ),
+        //             ),
+        //             Text(
+        //               DateFormat('yyyy년 MM월 dd일').format(DateTime.now()),
+        //               textAlign: TextAlign.left,
+        //             ),
+        //           ],
+        //         ),
+        //         const Image(image: AssetImage('assets/images/logo.png'))
+        //       ],
+        //     ),
+        //     Row(
+        //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //       children: const [
+        //         Text('월'),
+        //         Text('화'),
+        //         Text('수'),
+        //         Text('목'),
+        //         Text('금'),
+        //         Text('토'),
+        //         Text('일'),
+        //       ],
+        //     )
+        //   ],
+        // ),
+
+  Column headerContent(BuildContext context) {
+    return Column( 
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top)
+        ),   // 상태바 높이 패딩
+        Text(
+          '안녕하세요 !',
+          textAlign: TextAlign.left, 
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text.rich(
+                  TextSpan(
+                    children: <TextSpan>[
+                      TextSpan(
+                        text: '오늘도 힘차게 ', 
+                        style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+                      TextSpan(
+                        text: '다해 ', 
+                        style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Theme.of(context).highlightColor)),
+                      TextSpan(
+                        text: '볼까요?', 
+                        style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+                    ]
+                  ),
+                ),
+              ],
+            ),
+            Image(image: AssetImage('assets/images/logo.png'))
+          ],
+        ),
+        Text(_CurrentDay(), textAlign: TextAlign.left, style: TextStyle(fontSize: 12),),
+        SizedBox(height:10),  // 간격 띄우기
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            dayButton('월'),
+            dayButton('화'),
+            dayButton('수'),
+            dayButton('목'),
+            dayButton('금'),
+            dayButton('토'),
+            dayButton('일'),
+          ],
+        )
+      ],
+    );
+  }
+
+  RawMaterialButton dayButton(day) {
+    return RawMaterialButton(
+      onPressed: () {},
+      elevation: 2.0,
+      fillColor: Color(0x80D3BFF9),
+      child: Text(day),
+      padding: EdgeInsets.all(15.0),
+      constraints: BoxConstraints(),
+      shape: CircleBorder(),
+    );
+  }
+
+  // ElevatedButton dayButton(day) {
+  //   return ElevatedButton(
+  //     onPressed: () {}, 
+  //     child: Text(day, style: TextStyle(color: Colors.black),),
+  //     style: ElevatedButton.styleFrom(
+  //       backgroundColor: Color(0x80D3BFF9),
+  //       shape: CircleBorder()),
+        
+  //   );
+  // }
+
+  String _CurrentDay() {
+    DateTime now = DateTime.now();
+    DateTime today = DateTime(now.year, now.month, now.day);
+
+    return DateFormat('yyyy 년 MM 월 dd 일').format(today);
   }
 }
