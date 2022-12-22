@@ -29,76 +29,11 @@ class Header extends StatelessWidget {
         color: Theme.of(context).backgroundColor,
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
+        padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
         child: headerContent(context)
       ),
     );
   }
-
-        // Column(
-        //   crossAxisAlignment: CrossAxisAlignment.start,
-        //   children: [
-        //     Padding(
-        //       padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-        //     ), // 상태바 높이 패딩
-        //     Row(
-        //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //       children: [
-        //         Column(
-        //           crossAxisAlignment: CrossAxisAlignment.start,
-        //           children: [
-        //             const Text(
-        //               '안녕하세요 !',
-        //               textAlign: TextAlign.left,
-        //               style:
-        //                   TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-        //             ),
-        //             Text.rich(
-        //               TextSpan(
-        //                 children: [
-        //                   const TextSpan(
-        //                     text: '오늘도 힘차게 ',
-        //                     style: TextStyle(
-        //                         fontSize: 22, fontWeight: FontWeight.bold),
-        //                   ),
-        //                   TextSpan(
-        //                     text: '다해 ',
-        //                     style: TextStyle(
-        //                         fontSize: 22,
-        //                         fontWeight: FontWeight.bold,
-        //                         color: Theme.of(context).highlightColor),
-        //                   ),
-        //                   const TextSpan(
-        //                     text: '볼까요?',
-        //                     style: TextStyle(
-        //                         fontSize: 22, fontWeight: FontWeight.bold),
-        //                   ),
-        //                 ],
-        //               ),
-        //             ),
-        //             Text(
-        //               DateFormat('yyyy년 MM월 dd일').format(DateTime.now()),
-        //               textAlign: TextAlign.left,
-        //             ),
-        //           ],
-        //         ),
-        //         const Image(image: AssetImage('assets/images/logo.png'))
-        //       ],
-        //     ),
-        //     Row(
-        //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //       children: const [
-        //         Text('월'),
-        //         Text('화'),
-        //         Text('수'),
-        //         Text('목'),
-        //         Text('금'),
-        //         Text('토'),
-        //         Text('일'),
-        //       ],
-        //     )
-        //   ],
-        // ),
 
   Column headerContent(BuildContext context) {
     return Column( 
