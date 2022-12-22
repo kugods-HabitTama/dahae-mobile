@@ -36,7 +36,7 @@ class _HabitScreenState extends State<HabitScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: snapshot.data!
-                          .map((e) => HabitRecordTile(habit: e))
+                          .map((e) => HabitRecordTile(title: e.title))
                           .toList(),
                     ),
                   );
