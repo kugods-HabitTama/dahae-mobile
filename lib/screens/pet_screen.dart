@@ -1,3 +1,4 @@
+import 'package:dahae_mobile/screens/pet/pet_header.dart';
 import 'package:flutter/material.dart';
 
 class PetScreen extends StatefulWidget {
@@ -10,6 +11,12 @@ class PetScreen extends StatefulWidget {
 class _PetScreenState extends State<PetScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Center(child: Text('Tama'));
+    return Scaffold(
+      body: Column(
+        children: [
+          const PetHeader(),
+        ],
+      ),
+    );
   }
 }
