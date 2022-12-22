@@ -1,12 +1,19 @@
-// edit_dialog
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class EditDialog extends StatefulWidget {
+  final String title;
+  final int value;
+  final String unit;
+
   // final String title, descriptions, text;
   // final Image img;
 
   const EditDialog({
     super.key,
+    required this.title,
+    required this.unit,
+    required this.value,
   });
 
   @override
@@ -14,6 +21,8 @@ class EditDialog extends StatefulWidget {
 }
 
 class _EditDialogState extends State<EditDialog> {
+  bool timeSet = false;
+
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -26,16 +35,39 @@ class _EditDialogState extends State<EditDialog> {
     );
   }
 
+  textBox(context, width, right) {
+    return Container(
+      margin: EdgeInsets.fromLTRB(0, 5, right, 5),
+      height: 25.0,
+      width: width,
+      alignment: Alignment.centerLeft,
+      child: TextField(
+        decoration: InputDecoration(
+          filled: true,
+          fillColor: Theme.of(context).primaryColor.withOpacity(0.7),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(5),
+            borderSide: BorderSide.none,
+          ),
+        ),
+      ),
+    );
+  }
+
   contentBox(context) {
     return Container(
+      width: 200,
       padding: EdgeInsets.all(8.0),
       decoration: BoxDecoration(
-        border:
-            Border.all(width: 2, color: Theme.of(context).bottomAppBarColor),
+        borderRadius: BorderRadius.all(
+          Radius.circular(10.0),
+        ),
         color: Theme.of(context).backgroundColor,
       ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Align(
             alignment: Alignment.topRight,
@@ -51,8 +83,62 @@ class _EditDialogState extends State<EditDialog> {
               hintText: "해빗 네임",
             ),
           ),
-          const Text("Day"),
-          const Text("Info"),
+          Container(
+            child: Column(
+              children: [
+                Text(
+                  "실천 요일 *",
+                  style: Theme.of(context).textTheme.bodyText2,
+                ),
+                Text("m t w t"),
+              ],
+            ),
+          ),
+          Container(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "해빗 상세정보 *",
+                  style: Theme.of(context).textTheme.bodyText2,
+                ),
+                textBox(context, 170.0, 0.0),
+                Row(
+                  children: [
+                    textBox(context, 60.0, 10.0),
+                    textBox(context, 60.0, 0.0),
+                  ],
+                ),
+                Divider(
+                  thickness: 1,
+                  height: 1,
+                  color: Theme.of(context).primaryColor.withOpacity(0.7),
+                ),
+                Text(
+                  "실천 기간",
+                  style: Theme.of(context).textTheme.bodyText2,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    textBox(context, 100.0, 0.0),
+                    Text(
+                      "~",
+                      style: Theme.of(context).textTheme.bodyText2,
+                    ),
+                    textBox(context, 100.0, 0.0),
+                  ],
+                ),
+                Row(children: [
+                  textBox(context, 140.0, 10.0),
+                  CupertinoSwitch(
+                    value: timeSet,
+                    onChanged: (value) => setState(() => timeSet = !timeSet),
+                  )
+                ])
+              ],
+            ),
+          ),
         ],
       ),
     );
