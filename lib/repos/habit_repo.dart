@@ -2,10 +2,12 @@ import 'dart:convert';
 
 import 'package:dahae_mobile/models/habit.dart';
 
+// HabitRecord.habitId -> Habit (Map)
+
 abstract class HabitRepo {
   static final List<Habit> habitList = [
     Habit.fromJson(jsonDecode(
-        '{"id":0,"title":"title0","action":"string0000","value":0,"unit":"stri0ng","time":"10:10","startDate":"2022-12-10","endDate":"2022-12-21","days":["Mon"]}')),
+        '{"id":0,"title":"title0","action":"string0000","value":10,"unit":"stri0ng","time":"10:10","startDate":"2022-12-10","endDate":"2022-12-21","days":["Mon"]}')),
     Habit.fromJson(jsonDecode(
         '{"id":1,"title":"title1","action":"string1111","value":11,"unit":"stri1ng","time":"11:10","startDate":"2022-12-11","endDate":"2022-12-21","days":["Mon"]}')),
     Habit.fromJson(jsonDecode(

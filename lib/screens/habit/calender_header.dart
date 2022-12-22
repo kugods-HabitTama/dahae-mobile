@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -29,23 +27,23 @@ class Header extends StatelessWidget {
         color: Theme.of(context).backgroundColor,
       ),
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
-        child: headerContent(context)
-      ),
+          padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
+          child: headerContent(context)),
     );
   }
 
   Column headerContent(BuildContext context) {
-    return Column( 
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top)
-        ),   // 상태바 높이 패딩
-        Text(
+            padding: EdgeInsets.only(
+                top: MediaQuery.of(context).padding.top)), // 상태바 높이 패딩
+        const Text(
           '안녕하세요 !',
-          textAlign: TextAlign.left, 
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
+          textAlign: TextAlign.left,
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -55,25 +53,34 @@ class Header extends StatelessWidget {
                 Text.rich(
                   TextSpan(
                     children: <TextSpan>[
+                      const TextSpan(
+                          text: '오늘도 힘차게 ',
+                          style: TextStyle(
+                              fontSize: 22, fontWeight: FontWeight.bold)),
                       TextSpan(
-                        text: '오늘도 힘차게 ', 
-                        style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
-                      TextSpan(
-                        text: '다해 ', 
-                        style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Theme.of(context).highlightColor)),
-                      TextSpan(
-                        text: '볼까요?', 
-                        style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
-                    ]
+                          text: '다해 ',
+                          style: TextStyle(
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold,
+                              color: Theme.of(context).highlightColor)),
+                      const TextSpan(
+                          text: '볼까요?',
+                          style: TextStyle(
+                              fontSize: 22, fontWeight: FontWeight.bold)),
+                    ],
                   ),
                 ),
               ],
             ),
-            Image(image: AssetImage('assets/images/logo.png'))
+            const Image(image: AssetImage('assets/images/logo.png'))
           ],
         ),
-        Text(_CurrentDay(), textAlign: TextAlign.left, style: TextStyle(fontSize: 12),),
-        SizedBox(height:10),  // 간격 띄우기
+        Text(
+          _currentDay(),
+          textAlign: TextAlign.left,
+          style: const TextStyle(fontSize: 12),
+        ),
+        const SizedBox(height: 10), // 간격 띄우기
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -94,26 +101,26 @@ class Header extends StatelessWidget {
     return RawMaterialButton(
       onPressed: () {},
       elevation: 2.0,
-      fillColor: Color(0x80D3BFF9),
+      fillColor: const Color(0x80D3BFF9),
+      padding: const EdgeInsets.all(15.0),
+      constraints: const BoxConstraints(),
+      shape: const CircleBorder(),
       child: Text(day),
-      padding: EdgeInsets.all(15.0),
-      constraints: BoxConstraints(),
-      shape: CircleBorder(),
     );
   }
 
   // ElevatedButton dayButton(day) {
   //   return ElevatedButton(
-  //     onPressed: () {}, 
+  //     onPressed: () {},
   //     child: Text(day, style: TextStyle(color: Colors.black),),
   //     style: ElevatedButton.styleFrom(
   //       backgroundColor: Color(0x80D3BFF9),
   //       shape: CircleBorder()),
-        
+
   //   );
   // }
 
-  String _CurrentDay() {
+  String _currentDay() {
     DateTime now = DateTime.now();
     DateTime today = DateTime(now.year, now.month, now.day);
 

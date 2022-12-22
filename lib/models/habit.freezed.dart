@@ -20,11 +20,12 @@ Habit _$HabitFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Habit {
-  int get id => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get action => throw _privateConstructorUsedError;
   int get value => throw _privateConstructorUsedError;
-  String get unit => throw _privateConstructorUsedError;
+  int get progress => throw _privateConstructorUsedError;
+  String? get unit => throw _privateConstructorUsedError;
   @TimeStringToTimeOfDayConverter()
   TimeOfDay get time => throw _privateConstructorUsedError;
   @DateStringToDateTimeConverter()
@@ -44,11 +45,12 @@ abstract class $HabitCopyWith<$Res> {
       _$HabitCopyWithImpl<$Res, Habit>;
   @useResult
   $Res call(
-      {int id,
+      {int? id,
       String title,
       String action,
       int value,
-      String unit,
+      int progress,
+      String? unit,
       @TimeStringToTimeOfDayConverter() TimeOfDay time,
       @DateStringToDateTimeConverter() DateTime startDate,
       @DateStringToDateTimeConverter() DateTime endDate,
@@ -68,21 +70,22 @@ class _$HabitCopyWithImpl<$Res, $Val extends Habit>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? id = freezed,
     Object? title = null,
     Object? action = null,
     Object? value = null,
-    Object? unit = null,
+    Object? progress = null,
+    Object? unit = freezed,
     Object? time = null,
     Object? startDate = null,
     Object? endDate = null,
     Object? days = null,
   }) {
     return _then(_value.copyWith(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -95,10 +98,14 @@ class _$HabitCopyWithImpl<$Res, $Val extends Habit>
           ? _value.value
           : value // ignore: cast_nullable_to_non_nullable
               as int,
-      unit: null == unit
+      progress: null == progress
+          ? _value.progress
+          : progress // ignore: cast_nullable_to_non_nullable
+              as int,
+      unit: freezed == unit
           ? _value.unit
           : unit // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       time: null == time
           ? _value.time
           : time // ignore: cast_nullable_to_non_nullable
@@ -126,11 +133,12 @@ abstract class _$$_HabitCopyWith<$Res> implements $HabitCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {int id,
+      {int? id,
       String title,
       String action,
       int value,
-      String unit,
+      int progress,
+      String? unit,
       @TimeStringToTimeOfDayConverter() TimeOfDay time,
       @DateStringToDateTimeConverter() DateTime startDate,
       @DateStringToDateTimeConverter() DateTime endDate,
@@ -146,21 +154,22 @@ class __$$_HabitCopyWithImpl<$Res> extends _$HabitCopyWithImpl<$Res, _$_Habit>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? id = freezed,
     Object? title = null,
     Object? action = null,
     Object? value = null,
-    Object? unit = null,
+    Object? progress = null,
+    Object? unit = freezed,
     Object? time = null,
     Object? startDate = null,
     Object? endDate = null,
     Object? days = null,
   }) {
     return _then(_$_Habit(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -173,10 +182,14 @@ class __$$_HabitCopyWithImpl<$Res> extends _$HabitCopyWithImpl<$Res, _$_Habit>
           ? _value.value
           : value // ignore: cast_nullable_to_non_nullable
               as int,
-      unit: null == unit
+      progress: null == progress
+          ? _value.progress
+          : progress // ignore: cast_nullable_to_non_nullable
+              as int,
+      unit: freezed == unit
           ? _value.unit
           : unit // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       time: null == time
           ? _value.time
           : time // ignore: cast_nullable_to_non_nullable
@@ -201,11 +214,12 @@ class __$$_HabitCopyWithImpl<$Res> extends _$HabitCopyWithImpl<$Res, _$_Habit>
 @JsonSerializable()
 class _$_Habit extends _Habit with DiagnosticableTreeMixin {
   const _$_Habit(
-      {required this.id,
+      {this.id,
       required this.title,
       required this.action,
       required this.value,
-      required this.unit,
+      this.progress = 0,
+      this.unit,
       @TimeStringToTimeOfDayConverter() required this.time,
       @DateStringToDateTimeConverter() required this.startDate,
       @DateStringToDateTimeConverter() required this.endDate,
@@ -217,7 +231,7 @@ class _$_Habit extends _Habit with DiagnosticableTreeMixin {
       _$$_HabitFromJson(json);
 
   @override
-  final int id;
+  final int? id;
   @override
   final String title;
   @override
@@ -225,7 +239,10 @@ class _$_Habit extends _Habit with DiagnosticableTreeMixin {
   @override
   final int value;
   @override
-  final String unit;
+  @JsonKey()
+  final int progress;
+  @override
+  final String? unit;
   @override
   @TimeStringToTimeOfDayConverter()
   final TimeOfDay time;
@@ -245,7 +262,7 @@ class _$_Habit extends _Habit with DiagnosticableTreeMixin {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Habit(id: $id, title: $title, action: $action, value: $value, unit: $unit, time: $time, startDate: $startDate, endDate: $endDate, days: $days)';
+    return 'Habit(id: $id, title: $title, action: $action, value: $value, progress: $progress, unit: $unit, time: $time, startDate: $startDate, endDate: $endDate, days: $days)';
   }
 
   @override
@@ -257,6 +274,7 @@ class _$_Habit extends _Habit with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty('title', title))
       ..add(DiagnosticsProperty('action', action))
       ..add(DiagnosticsProperty('value', value))
+      ..add(DiagnosticsProperty('progress', progress))
       ..add(DiagnosticsProperty('unit', unit))
       ..add(DiagnosticsProperty('time', time))
       ..add(DiagnosticsProperty('startDate', startDate))
@@ -273,6 +291,8 @@ class _$_Habit extends _Habit with DiagnosticableTreeMixin {
             (identical(other.title, title) || other.title == title) &&
             (identical(other.action, action) || other.action == action) &&
             (identical(other.value, value) || other.value == value) &&
+            (identical(other.progress, progress) ||
+                other.progress == progress) &&
             (identical(other.unit, unit) || other.unit == unit) &&
             (identical(other.time, time) || other.time == time) &&
             (identical(other.startDate, startDate) ||
@@ -283,8 +303,18 @@ class _$_Habit extends _Habit with DiagnosticableTreeMixin {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, title, action, value, unit,
-      time, startDate, endDate, const DeepCollectionEquality().hash(_days));
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      title,
+      action,
+      value,
+      progress,
+      unit,
+      time,
+      startDate,
+      endDate,
+      const DeepCollectionEquality().hash(_days));
 
   @JsonKey(ignore: true)
   @override
@@ -302,11 +332,12 @@ class _$_Habit extends _Habit with DiagnosticableTreeMixin {
 
 abstract class _Habit extends Habit {
   const factory _Habit(
-      {required final int id,
+      {final int? id,
       required final String title,
       required final String action,
       required final int value,
-      required final String unit,
+      final int progress,
+      final String? unit,
       @TimeStringToTimeOfDayConverter() required final TimeOfDay time,
       @DateStringToDateTimeConverter() required final DateTime startDate,
       @DateStringToDateTimeConverter() required final DateTime endDate,
@@ -316,7 +347,7 @@ abstract class _Habit extends Habit {
   factory _Habit.fromJson(Map<String, dynamic> json) = _$_Habit.fromJson;
 
   @override
-  int get id;
+  int? get id;
   @override
   String get title;
   @override
@@ -324,7 +355,9 @@ abstract class _Habit extends Habit {
   @override
   int get value;
   @override
-  String get unit;
+  int get progress;
+  @override
+  String? get unit;
   @override
   @TimeStringToTimeOfDayConverter()
   TimeOfDay get time;
