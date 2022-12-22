@@ -1,4 +1,4 @@
-// edit_dialog
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class EditDialog extends StatefulWidget {
@@ -21,6 +21,8 @@ class EditDialog extends StatefulWidget {
 }
 
 class _EditDialogState extends State<EditDialog> {
+  bool timeSet = false;
+
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -127,7 +129,13 @@ class _EditDialogState extends State<EditDialog> {
                     textBox(context, 100.0, 0.0),
                   ],
                 ),
-                textBox(context, 140.0, 10.0),
+                Row(children: [
+                  textBox(context, 140.0, 10.0),
+                  CupertinoSwitch(
+                    value: timeSet,
+                    onChanged: (value) => setState(() => timeSet = !timeSet),
+                  )
+                ])
               ],
             ),
           ),
