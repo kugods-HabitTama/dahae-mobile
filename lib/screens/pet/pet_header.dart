@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 class PetHeader extends StatelessWidget {
   const PetHeader({super.key});
@@ -7,10 +8,10 @@ class PetHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 500,
+      height: 586,
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.vertical(
-          bottom: Radius.circular(30.0),
+          bottom: Radius.circular(200.0),
         ),
         boxShadow: [
           BoxShadow(
