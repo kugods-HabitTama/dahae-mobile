@@ -27,7 +27,7 @@ class HabitRecordTile extends StatefulWidget {
 class _HabitRecordTileState extends State<HabitRecordTile> {
   // TimeofDay Type 을 format
   String formatTimeOfDay(TimeOfDay tod) {
-    final now = new DateTime.now();
+    final now = DateTime.now();
     final dt = DateTime(now.year, now.month, now.day, tod.hour, tod.minute);
     final format = DateFormat.jm(); //"6:00 AM"
     return format.format(dt);
@@ -202,10 +202,10 @@ class _HabitRecordTileState extends State<HabitRecordTile> {
                   ],
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: 20),
+                  margin: const EdgeInsets.only(top: 20),
                   child: Row(
                     children: [
-                      Container(
+                      SizedBox(
                         height: 25.0,
                         width: 100.0,
                         child: TextField(
