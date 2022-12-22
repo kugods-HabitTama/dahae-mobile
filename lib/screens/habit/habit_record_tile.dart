@@ -1,4 +1,3 @@
-// import 'package:dahae_mobile/models/habit.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:dahae_mobile/screens/habit/edit_dialog.dart';
@@ -10,13 +9,15 @@ import 'dart:math';
 // 수정버튼을 누르면 내부에 있는 HabitRecord의 Habit을 찾아 해당 Habit을 수정할 수 있는
 // 팝업을 띄울 수 있어야 합니다.
 class HabitRecordTile extends StatefulWidget {
-  // final String title;
+  final String title;
   //final String progress;
   //final TimeOfDay timeOfDay;
 
   const HabitRecordTile({
     super.key,
-    // required this.habit,
+    required this.title,
+    //required this.progress,
+    //required this.timeOfDay,
   });
 
   @override
@@ -25,10 +26,9 @@ class HabitRecordTile extends StatefulWidget {
 
 class _HabitRecordTileState extends State<HabitRecordTile> {
   // TimeofDay Type 을 format
-  String formatTimeOfDay(TimeOfDay timeOfDay) {
-    final now = DateTime.now();
-    final dt = DateTime(
-        now.year, now.month, now.day, timeOfDay.hour, timeOfDay.minute);
+  String formatTimeOfDay(TimeOfDay tod) {
+    final now = new DateTime.now();
+    final dt = DateTime(now.year, now.month, now.day, tod.hour, tod.minute);
     final format = DateFormat.jm(); //"6:00 AM"
     return format.format(dt);
   }
@@ -38,8 +38,11 @@ class _HabitRecordTileState extends State<HabitRecordTile> {
 
   @override
   Widget build(BuildContext context) {
+    // mockData - temp
     String title = "아침에 30분 요가하기";
     double progress = 0.4;
+    const TimeOfDay habitTime = TimeOfDay(hour: 08, minute: 0); // 8:00am
+    const String day = "목, 금";
     int value = 30;
     const String unit = "분";
 
@@ -48,15 +51,14 @@ class _HabitRecordTileState extends State<HabitRecordTile> {
     }
 
     Future<String?> openDialog() => showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return const EditDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return EditDialog(
             title: title,
             unit: unit,
             value: value,
           );
-          },
-        );
+        });
 
     var borderRadius = showTextField
         ? const BorderRadius.only(
