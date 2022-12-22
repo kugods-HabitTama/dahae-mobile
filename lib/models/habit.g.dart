@@ -7,11 +7,12 @@ part of 'habit.dart';
 // **************************************************************************
 
 _$_Habit _$$_HabitFromJson(Map<String, dynamic> json) => _$_Habit(
-      id: json['id'] as int,
+      id: json['id'] as int?,
       title: json['title'] as String,
       action: json['action'] as String,
       value: json['value'] as int,
-      unit: json['unit'] as String,
+      progress: json['progress'] as int? ?? 0,
+      unit: json['unit'] as String?,
       time: const TimeStringToTimeOfDayConverter()
           .fromJson(json['time'] as String),
       startDate: const DateStringToDateTimeConverter()
@@ -28,6 +29,7 @@ Map<String, dynamic> _$$_HabitToJson(_$_Habit instance) => <String, dynamic>{
       'title': instance.title,
       'action': instance.action,
       'value': instance.value,
+      'progress': instance.progress,
       'unit': instance.unit,
       'time': const TimeStringToTimeOfDayConverter().toJson(instance.time),
       'startDate':

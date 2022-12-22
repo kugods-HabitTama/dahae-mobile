@@ -13,8 +13,8 @@ class _PetScreenState extends State<PetScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
-        children: [
-          const PetHeader(),
+        children: const [
+          PetHeader(),
         ],
       ),
     );
