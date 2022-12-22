@@ -46,13 +46,13 @@ class _EditDialogState extends State<EditDialog> {
               icon: const Icon(Icons.close),
             ),
           ),
-          TextField(
+          const TextField(
             decoration: InputDecoration(
               hintText: "해빗 네임",
             ),
           ),
-          Text("Day"),
-          Text("Info"),
+          const Text("Day"),
+          const Text("Info"),
         ],
       ),
     );

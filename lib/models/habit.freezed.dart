@@ -31,8 +31,7 @@ mixin _$Habit {
   DateTime get startDate => throw _privateConstructorUsedError;
   @DateStringToDateTimeConverter()
   DateTime get endDate => throw _privateConstructorUsedError;
-  @DayStringToIntConverter()
-  List<int> get days => throw _privateConstructorUsedError;
+  List<DayOfWeek> get days => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -53,7 +52,7 @@ abstract class $HabitCopyWith<$Res> {
       @TimeStringToTimeOfDayConverter() TimeOfDay time,
       @DateStringToDateTimeConverter() DateTime startDate,
       @DateStringToDateTimeConverter() DateTime endDate,
-      @DayStringToIntConverter() List<int> days});
+      List<DayOfWeek> days});
 }
 
 /// @nodoc
@@ -115,7 +114,7 @@ class _$HabitCopyWithImpl<$Res, $Val extends Habit>
       days: null == days
           ? _value.days
           : days // ignore: cast_nullable_to_non_nullable
-              as List<int>,
+              as List<DayOfWeek>,
     ) as $Val);
   }
 }
@@ -135,7 +134,7 @@ abstract class _$$_HabitCopyWith<$Res> implements $HabitCopyWith<$Res> {
       @TimeStringToTimeOfDayConverter() TimeOfDay time,
       @DateStringToDateTimeConverter() DateTime startDate,
       @DateStringToDateTimeConverter() DateTime endDate,
-      @DayStringToIntConverter() List<int> days});
+      List<DayOfWeek> days});
 }
 
 /// @nodoc
@@ -193,14 +192,14 @@ class __$$_HabitCopyWithImpl<$Res> extends _$HabitCopyWithImpl<$Res, _$_Habit>
       days: null == days
           ? _value._days
           : days // ignore: cast_nullable_to_non_nullable
-              as List<int>,
+              as List<DayOfWeek>,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_Habit with DiagnosticableTreeMixin implements _Habit {
+class _$_Habit extends _Habit with DiagnosticableTreeMixin {
   const _$_Habit(
       {required this.id,
       required this.title,
@@ -210,8 +209,9 @@ class _$_Habit with DiagnosticableTreeMixin implements _Habit {
       @TimeStringToTimeOfDayConverter() required this.time,
       @DateStringToDateTimeConverter() required this.startDate,
       @DateStringToDateTimeConverter() required this.endDate,
-      @DayStringToIntConverter() required final List<int> days})
-      : _days = days;
+      required final List<DayOfWeek> days})
+      : _days = days,
+        super._();
 
   factory _$_Habit.fromJson(Map<String, dynamic> json) =>
       _$$_HabitFromJson(json);
@@ -235,10 +235,9 @@ class _$_Habit with DiagnosticableTreeMixin implements _Habit {
   @override
   @DateStringToDateTimeConverter()
   final DateTime endDate;
-  final List<int> _days;
+  final List<DayOfWeek> _days;
   @override
-  @DayStringToIntConverter()
-  List<int> get days {
+  List<DayOfWeek> get days {
     if (_days is EqualUnmodifiableListView) return _days;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_days);
@@ -301,7 +300,7 @@ class _$_Habit with DiagnosticableTreeMixin implements _Habit {
   }
 }
 
-abstract class _Habit implements Habit {
+abstract class _Habit extends Habit {
   const factory _Habit(
       {required final int id,
       required final String title,
@@ -311,7 +310,8 @@ abstract class _Habit implements Habit {
       @TimeStringToTimeOfDayConverter() required final TimeOfDay time,
       @DateStringToDateTimeConverter() required final DateTime startDate,
       @DateStringToDateTimeConverter() required final DateTime endDate,
-      @DayStringToIntConverter() required final List<int> days}) = _$_Habit;
+      required final List<DayOfWeek> days}) = _$_Habit;
+  const _Habit._() : super._();
 
   factory _Habit.fromJson(Map<String, dynamic> json) = _$_Habit.fromJson;
 
@@ -335,8 +335,7 @@ abstract class _Habit implements Habit {
   @DateStringToDateTimeConverter()
   DateTime get endDate;
   @override
-  @DayStringToIntConverter()
-  List<int> get days;
+  List<DayOfWeek> get days;
   @override
   @JsonKey(ignore: true)
   _$$_HabitCopyWith<_$_Habit> get copyWith =>

@@ -19,7 +19,7 @@ _$_Habit _$$_HabitFromJson(Map<String, dynamic> json) => _$_Habit(
       endDate: const DateStringToDateTimeConverter()
           .fromJson(json['endDate'] as String),
       days: (json['days'] as List<dynamic>)
-          .map((e) => const DayStringToIntConverter().fromJson(e as String))
+          .map((e) => $enumDecode(_$DayOfWeekEnumMap, e))
           .toList(),
     );
 
@@ -33,6 +33,15 @@ Map<String, dynamic> _$$_HabitToJson(_$_Habit instance) => <String, dynamic>{
       'startDate':
           const DateStringToDateTimeConverter().toJson(instance.startDate),
       'endDate': const DateStringToDateTimeConverter().toJson(instance.endDate),
-      'days':
-          instance.days.map(const DayStringToIntConverter().toJson).toList(),
+      'days': instance.days.map((e) => _$DayOfWeekEnumMap[e]!).toList(),
     };
+
+const _$DayOfWeekEnumMap = {
+  DayOfWeek.mon: 'Mon',
+  DayOfWeek.tue: 'Tue',
+  DayOfWeek.wed: 'Web',
+  DayOfWeek.thu: 'Tue',
+  DayOfWeek.fri: 'Fri',
+  DayOfWeek.sat: 'Sat',
+  DayOfWeek.sun: 'Sun',
+};
