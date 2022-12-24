@@ -25,7 +25,7 @@ mixin _$Habit {
   String get action => throw _privateConstructorUsedError;
   int get value => throw _privateConstructorUsedError;
   int get progress => throw _privateConstructorUsedError;
-  String? get unit => throw _privateConstructorUsedError;
+  String get unit => throw _privateConstructorUsedError;
   @TimeStringToTimeOfDayConverter()
   TimeOfDay get time => throw _privateConstructorUsedError;
   @DateStringToDateTimeConverter()
@@ -50,7 +50,7 @@ abstract class $HabitCopyWith<$Res> {
       String action,
       int value,
       int progress,
-      String? unit,
+      String unit,
       @TimeStringToTimeOfDayConverter() TimeOfDay time,
       @DateStringToDateTimeConverter() DateTime startDate,
       @DateStringToDateTimeConverter() DateTime endDate,
@@ -75,7 +75,7 @@ class _$HabitCopyWithImpl<$Res, $Val extends Habit>
     Object? action = null,
     Object? value = null,
     Object? progress = null,
-    Object? unit = freezed,
+    Object? unit = null,
     Object? time = null,
     Object? startDate = null,
     Object? endDate = null,
@@ -102,10 +102,10 @@ class _$HabitCopyWithImpl<$Res, $Val extends Habit>
           ? _value.progress
           : progress // ignore: cast_nullable_to_non_nullable
               as int,
-      unit: freezed == unit
+      unit: null == unit
           ? _value.unit
           : unit // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       time: null == time
           ? _value.time
           : time // ignore: cast_nullable_to_non_nullable
@@ -138,7 +138,7 @@ abstract class _$$_HabitCopyWith<$Res> implements $HabitCopyWith<$Res> {
       String action,
       int value,
       int progress,
-      String? unit,
+      String unit,
       @TimeStringToTimeOfDayConverter() TimeOfDay time,
       @DateStringToDateTimeConverter() DateTime startDate,
       @DateStringToDateTimeConverter() DateTime endDate,
@@ -159,7 +159,7 @@ class __$$_HabitCopyWithImpl<$Res> extends _$HabitCopyWithImpl<$Res, _$_Habit>
     Object? action = null,
     Object? value = null,
     Object? progress = null,
-    Object? unit = freezed,
+    Object? unit = null,
     Object? time = null,
     Object? startDate = null,
     Object? endDate = null,
@@ -186,10 +186,10 @@ class __$$_HabitCopyWithImpl<$Res> extends _$HabitCopyWithImpl<$Res, _$_Habit>
           ? _value.progress
           : progress // ignore: cast_nullable_to_non_nullable
               as int,
-      unit: freezed == unit
+      unit: null == unit
           ? _value.unit
           : unit // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       time: null == time
           ? _value.time
           : time // ignore: cast_nullable_to_non_nullable
@@ -219,7 +219,7 @@ class _$_Habit extends _Habit with DiagnosticableTreeMixin {
       required this.action,
       required this.value,
       this.progress = 0,
-      this.unit,
+      required this.unit,
       @TimeStringToTimeOfDayConverter() required this.time,
       @DateStringToDateTimeConverter() required this.startDate,
       @DateStringToDateTimeConverter() required this.endDate,
@@ -242,7 +242,7 @@ class _$_Habit extends _Habit with DiagnosticableTreeMixin {
   @JsonKey()
   final int progress;
   @override
-  final String? unit;
+  final String unit;
   @override
   @TimeStringToTimeOfDayConverter()
   final TimeOfDay time;
@@ -337,7 +337,7 @@ abstract class _Habit extends Habit {
       required final String action,
       required final int value,
       final int progress,
-      final String? unit,
+      required final String unit,
       @TimeStringToTimeOfDayConverter() required final TimeOfDay time,
       @DateStringToDateTimeConverter() required final DateTime startDate,
       @DateStringToDateTimeConverter() required final DateTime endDate,
@@ -357,7 +357,7 @@ abstract class _Habit extends Habit {
   @override
   int get progress;
   @override
-  String? get unit;
+  String get unit;
   @override
   @TimeStringToTimeOfDayConverter()
   TimeOfDay get time;

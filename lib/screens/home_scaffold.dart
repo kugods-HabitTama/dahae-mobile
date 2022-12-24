@@ -26,10 +26,9 @@ class NavBar extends StatelessWidget {
         borderRadius: const BorderRadius.vertical(top: Radius.circular(16.0)),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.5),
-            spreadRadius: 5,
-            blurRadius: 7,
-            offset: const Offset(0, 0),
+            color: Colors.grey.withOpacity(0.3),
+            spreadRadius: 3,
+            blurRadius: 5,
           )
         ],
         color: Theme.of(context).backgroundColor,

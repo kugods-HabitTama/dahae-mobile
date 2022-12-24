@@ -15,6 +15,8 @@ class DahaeApp extends StatelessWidget {
     return MaterialApp.router(
       routerConfig: _router,
       theme: _theme,
+      builder: (context, child) => ScrollConfiguration(
+          behavior: DiableScrollGlow(), child: child ?? Container()),
     );
   }
 
@@ -84,4 +86,12 @@ class DahaeApp extends StatelessWidget {
       ),
     ),
   );
+}
+
+class DiableScrollGlow extends ScrollBehavior {
+  @override
+  Widget buildOverscrollIndicator(
+      BuildContext context, Widget child, ScrollableDetails details) {
+    return child;
+  }
 }

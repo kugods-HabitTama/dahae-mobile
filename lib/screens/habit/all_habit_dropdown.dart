@@ -68,7 +68,7 @@ class _AllHabitDropdownState extends State<AllHabitDropdown> {
           boxShadow: [
             if (!_open)
               BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
+                color: Colors.grey.withOpacity(0.3),
                 spreadRadius: 3,
                 blurRadius: 5,
               )
