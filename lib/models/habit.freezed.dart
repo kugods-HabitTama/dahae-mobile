@@ -24,7 +24,6 @@ mixin _$Habit {
   String get title => throw _privateConstructorUsedError;
   String get action => throw _privateConstructorUsedError;
   int get value => throw _privateConstructorUsedError;
-  int get progress => throw _privateConstructorUsedError;
   String get unit => throw _privateConstructorUsedError;
   @TimeStringToTimeOfDayConverter()
   TimeOfDay get time => throw _privateConstructorUsedError;
@@ -49,7 +48,6 @@ abstract class $HabitCopyWith<$Res> {
       String title,
       String action,
       int value,
-      int progress,
       String unit,
       @TimeStringToTimeOfDayConverter() TimeOfDay time,
       @DateStringToDateTimeConverter() DateTime startDate,
@@ -74,7 +72,6 @@ class _$HabitCopyWithImpl<$Res, $Val extends Habit>
     Object? title = null,
     Object? action = null,
     Object? value = null,
-    Object? progress = null,
     Object? unit = null,
     Object? time = null,
     Object? startDate = null,
@@ -97,10 +94,6 @@ class _$HabitCopyWithImpl<$Res, $Val extends Habit>
       value: null == value
           ? _value.value
           : value // ignore: cast_nullable_to_non_nullable
-              as int,
-      progress: null == progress
-          ? _value.progress
-          : progress // ignore: cast_nullable_to_non_nullable
               as int,
       unit: null == unit
           ? _value.unit
@@ -137,7 +130,6 @@ abstract class _$$_HabitCopyWith<$Res> implements $HabitCopyWith<$Res> {
       String title,
       String action,
       int value,
-      int progress,
       String unit,
       @TimeStringToTimeOfDayConverter() TimeOfDay time,
       @DateStringToDateTimeConverter() DateTime startDate,
@@ -158,7 +150,6 @@ class __$$_HabitCopyWithImpl<$Res> extends _$HabitCopyWithImpl<$Res, _$_Habit>
     Object? title = null,
     Object? action = null,
     Object? value = null,
-    Object? progress = null,
     Object? unit = null,
     Object? time = null,
     Object? startDate = null,
@@ -181,10 +172,6 @@ class __$$_HabitCopyWithImpl<$Res> extends _$HabitCopyWithImpl<$Res, _$_Habit>
       value: null == value
           ? _value.value
           : value // ignore: cast_nullable_to_non_nullable
-              as int,
-      progress: null == progress
-          ? _value.progress
-          : progress // ignore: cast_nullable_to_non_nullable
               as int,
       unit: null == unit
           ? _value.unit
@@ -218,7 +205,6 @@ class _$_Habit extends _Habit with DiagnosticableTreeMixin {
       required this.title,
       required this.action,
       required this.value,
-      this.progress = 0,
       required this.unit,
       @TimeStringToTimeOfDayConverter() required this.time,
       @DateStringToDateTimeConverter() required this.startDate,
@@ -238,9 +224,6 @@ class _$_Habit extends _Habit with DiagnosticableTreeMixin {
   final String action;
   @override
   final int value;
-  @override
-  @JsonKey()
-  final int progress;
   @override
   final String unit;
   @override
@@ -262,7 +245,7 @@ class _$_Habit extends _Habit with DiagnosticableTreeMixin {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Habit(id: $id, title: $title, action: $action, value: $value, progress: $progress, unit: $unit, time: $time, startDate: $startDate, endDate: $endDate, days: $days)';
+    return 'Habit(id: $id, title: $title, action: $action, value: $value, unit: $unit, time: $time, startDate: $startDate, endDate: $endDate, days: $days)';
   }
 
   @override
@@ -274,7 +257,6 @@ class _$_Habit extends _Habit with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty('title', title))
       ..add(DiagnosticsProperty('action', action))
       ..add(DiagnosticsProperty('value', value))
-      ..add(DiagnosticsProperty('progress', progress))
       ..add(DiagnosticsProperty('unit', unit))
       ..add(DiagnosticsProperty('time', time))
       ..add(DiagnosticsProperty('startDate', startDate))
@@ -291,8 +273,6 @@ class _$_Habit extends _Habit with DiagnosticableTreeMixin {
             (identical(other.title, title) || other.title == title) &&
             (identical(other.action, action) || other.action == action) &&
             (identical(other.value, value) || other.value == value) &&
-            (identical(other.progress, progress) ||
-                other.progress == progress) &&
             (identical(other.unit, unit) || other.unit == unit) &&
             (identical(other.time, time) || other.time == time) &&
             (identical(other.startDate, startDate) ||
@@ -303,18 +283,8 @@ class _$_Habit extends _Habit with DiagnosticableTreeMixin {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      title,
-      action,
-      value,
-      progress,
-      unit,
-      time,
-      startDate,
-      endDate,
-      const DeepCollectionEquality().hash(_days));
+  int get hashCode => Object.hash(runtimeType, id, title, action, value, unit,
+      time, startDate, endDate, const DeepCollectionEquality().hash(_days));
 
   @JsonKey(ignore: true)
   @override
@@ -336,7 +306,6 @@ abstract class _Habit extends Habit {
       required final String title,
       required final String action,
       required final int value,
-      final int progress,
       required final String unit,
       @TimeStringToTimeOfDayConverter() required final TimeOfDay time,
       @DateStringToDateTimeConverter() required final DateTime startDate,
@@ -354,8 +323,6 @@ abstract class _Habit extends Habit {
   String get action;
   @override
   int get value;
-  @override
-  int get progress;
   @override
   String get unit;
   @override

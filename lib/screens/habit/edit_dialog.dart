@@ -17,7 +17,7 @@ class EditDialog extends StatefulWidget {
   });
 
   @override
-  _EditDialogState createState() => _EditDialogState();
+  State<EditDialog> createState() => _EditDialogState();
 }
 
 class _EditDialogState extends State<EditDialog> {
