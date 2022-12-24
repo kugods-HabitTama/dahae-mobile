@@ -17,7 +17,6 @@ class Habit with _$Habit {
     required String title,
     required String action,
     required int value,
-    @Default(0) int progress,
     required String unit,
     @TimeStringToTimeOfDayConverter() required TimeOfDay time,
     @DateStringToDateTimeConverter() required DateTime startDate,
@@ -25,8 +24,7 @@ class Habit with _$Habit {
     required List<DayOfWeek> days,
   }) = _Habit;
 
-  factory Habit.fromJson(Map<String, Object?> json) => _$HabitFromJson(json);
+  factory Habit.fromJson(Map<String, dynamic> json) => _$HabitFromJson(json);
 
   String get daysToString => days.map((e) => e.korean).join(', ');
-  double get progressPercent => progress / value;
 }

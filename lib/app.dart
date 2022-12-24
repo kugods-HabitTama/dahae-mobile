@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:go_router/go_router.dart';
 
-import '../screens/screens.dart';
+import 'screens/screens.dart';
 
 GlobalKey<NavigatorState> _rootkey = GlobalKey<NavigatorState>();
 GlobalKey<NavigatorState> _homekey = GlobalKey<NavigatorState>();

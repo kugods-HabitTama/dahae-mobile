@@ -1,4 +1,4 @@
-import 'package:dahae_mobile/models/habit.dart';
+import 'package:dahae_mobile/models/habit_record.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:dahae_mobile/screens/habit/edit_dialog.dart';
@@ -10,9 +10,9 @@ import 'dart:math';
 // 수정버튼을 누르면 내부에 있는 HabitRecord의 Habit을 찾아 해당 Habit을 수정할 수 있는
 // 팝업을 띄울 수 있어야 합니다.
 class HabitRecordTile extends StatefulWidget {
-  final Habit habit;
+  final HabitRecord habitRecord;
 
-  const HabitRecordTile({super.key, required this.habit});
+  const HabitRecordTile({super.key, required this.habitRecord});
 
   @override
   State<HabitRecordTile> createState() => _HabitRecordTileState();
@@ -26,9 +26,9 @@ class _HabitRecordTileState extends State<HabitRecordTile> {
       context: context,
       builder: (BuildContext context) {
         return EditDialog(
-          title: widget.habit.title,
-          unit: widget.habit.unit,
-          value: widget.habit.value,
+          title: widget.habitRecord.habit.title,
+          unit: widget.habitRecord.habit.unit,
+          value: widget.habitRecord.habit.value,
         );
       });
 
@@ -66,13 +66,13 @@ class _HabitRecordTileState extends State<HabitRecordTile> {
               children: [
                 CircularProgressIndicator(
                   strokeWidth: 8,
-                  value: widget.habit.progressPercent,
+                  value: widget.habitRecord.progressPercent,
                   valueColor: AlwaysStoppedAnimation<Color>(
                       Theme.of(context).highlightColor),
                 ),
                 Center(
                   child: Text(
-                    percent.format(widget.habit.progressPercent),
+                    percent.format(widget.habitRecord.progressPercent),
                     style: const TextStyle(
                         fontWeight: FontWeight.bold, fontSize: 10),
                   ),
@@ -90,7 +90,7 @@ class _HabitRecordTileState extends State<HabitRecordTile> {
                 Container(
                   padding: const EdgeInsets.all(5),
                   child: Text(
-                    widget.habit.title,
+                    widget.habitRecord.habit.title,
                     style: const TextStyle(
                         fontWeight: FontWeight.bold, fontSize: 20),
                   ),
@@ -98,7 +98,7 @@ class _HabitRecordTileState extends State<HabitRecordTile> {
                 Container(
                   padding: const EdgeInsets.all(5),
                   child: Text(
-                    widget.habit.daysToString,
+                    widget.habitRecord.habit.daysToString,
                     style: const TextStyle(
                       color: Colors.grey,
                     ),
@@ -139,7 +139,7 @@ class _HabitRecordTileState extends State<HabitRecordTile> {
                     Container(
                       padding: const EdgeInsets.all(5),
                       child: Text(
-                        widget.habit.title,
+                        widget.habitRecord.habit.title,
                         style: const TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 20),
                       ),
@@ -147,7 +147,7 @@ class _HabitRecordTileState extends State<HabitRecordTile> {
                     Container(
                       padding: const EdgeInsets.all(5),
                       child: Text(
-                        widget.habit.daysToString,
+                        widget.habitRecord.habit.daysToString,
                         style: const TextStyle(
                           color: Colors.grey,
                         ),
@@ -192,7 +192,7 @@ class _HabitRecordTileState extends State<HabitRecordTile> {
                   ),
                 ),
                 Text(
-                  "${widget.habit.value} ${widget.habit.unit}",
+                  "${widget.habitRecord.habit.value} ${widget.habitRecord.habit.unit}",
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                   ),
@@ -217,7 +217,7 @@ class _HabitRecordTileState extends State<HabitRecordTile> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              widget.habit.time.format(context),
+              widget.habitRecord.habit.time.format(context),
               style: const TextStyle(fontWeight: FontWeight.w500),
             ),
             _open ? inputTile : defaultTile

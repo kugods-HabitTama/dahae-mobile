@@ -1,13 +1,12 @@
 import 'dart:math';
 
 import 'package:dahae_mobile/models/habit.dart';
-import 'package:dahae_mobile/repos/habit_repo.dart';
+import 'package:dahae_mobile/mock/habit_repo.dart';
 import 'package:flutter/material.dart';
 
 class AllHabitDropdown extends StatefulWidget {
-  const AllHabitDropdown({
-    Key? key,
-  }) : super(key: key);
+  final List<Habit> habits;
+  const AllHabitDropdown({Key? key, required this.habits}) : super(key: key);
 
   @override
   State<AllHabitDropdown> createState() => _AllHabitDropdownState();
@@ -36,7 +35,7 @@ class _AllHabitDropdownState extends State<AllHabitDropdown> {
         ? SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: HabitRepo.habitList
+              children: widget.habits
                   .map((e) => AllHabitDropdownTile(habit: e))
                   .toList(),
             ),

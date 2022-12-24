@@ -6,7 +6,7 @@ enum DayOfWeek {
   mon,
   @JsonValue('Tue')
   tue,
-  @JsonValue('Web')
+  @JsonValue('Wed')
   wed,
   @JsonValue('Tue')
   thu,
@@ -21,4 +21,6 @@ enum DayOfWeek {
 
   int get day => index + 1; // 월요일 1 ~ 일요일 7 (DateTime 기준)
   String get korean => _korean[index];
+
+  static String koreanFormat(int index) => _korean[index];
 }

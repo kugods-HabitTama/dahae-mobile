@@ -1,4 +1,6 @@
+import 'package:dahae_mobile/models/day_of_week.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
 // Todo
@@ -6,7 +8,9 @@ import 'package:intl/intl.dart';
 // 날짜를 찾아서 클릭했을 때 go_router를 통해 해당 날짜로 이동할 수 있어야함.
 
 class CalenderHeader extends StatelessWidget {
-  const CalenderHeader({super.key});
+  final DateTime selectedDate;
+
+  const CalenderHeader({super.key, required this.selectedDate});
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +55,7 @@ class CalenderHeader extends StatelessWidget {
               children: [
                 Text.rich(
                   TextSpan(
-                    children: <TextSpan>[
+                    children: [
                       const TextSpan(
                           text: '오늘도 힘차게 ',
                           style: TextStyle(
@@ -82,46 +86,56 @@ class CalenderHeader extends StatelessWidget {
           ],
         ),
         Text(
-          DateFormat('yyyy 년 MM 월 dd 일').format(DateTime.now()),
+          DateFormat('yyyy 년 MM 월 dd 일').format(selectedDate),
           textAlign: TextAlign.left,
           style: const TextStyle(fontSize: 12),
         ),
         const SizedBox(height: 10), // 간격 띄우기
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            dayButton('월'),
-            dayButton('화'),
-            dayButton('수'),
-            dayButton('목'),
-            dayButton('금'),
-            dayButton('토'),
-            dayButton('일'),
-          ],
+          children: List.generate(
+            7,
+            (index) => dayButton(
+              date: selectedDate
+                  .add(Duration(days: index - selectedDate.weekday + 1)),
+              dayButtomMode: DayButtomMode.dateOfWeek,
+              context: context,
+            ),
+          ),
         )
       ],
     );
   }
 
-  Widget dayButton(String day) {
-    return RawMaterialButton(
-      onPressed: () {},
-      fillColor: const Color(0x80D3BFF9),
-      padding: const EdgeInsets.all(15.0),
-      constraints: const BoxConstraints(),
-      shape: const CircleBorder(),
-      child: Text(day),
+  Widget dayButton(
+      {required DateTime date,
+      required DayButtomMode dayButtomMode,
+      required BuildContext context}) {
+    final now = DateTime.now();
+    final today = DateTime(now.year, now.month, now.day);
+    final isToday = date == today;
+    final isSelected = date == selectedDate;
+    final backgroundColor = isSelected
+        ? const Color(0xFFC4F954)
+        : isToday
+            ? const Color(0xFFD3BFF9)
+            : const Color(0x80D3BFF9);
+
+    return GestureDetector(
+      onTap: () => GoRouter.of(context)
+          .go('/habit/${DateFormat('yyyy/MM/dd').format(date)}'),
+      child: Container(
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: backgroundColor,
+        ),
+        padding: const EdgeInsets.all(15.0),
+        child: dayButtomMode == DayButtomMode.dateOfWeek
+            ? Text(DayOfWeek.koreanFormat(date.weekday - 1))
+            : Text('${date.day}'),
+      ),
     );
   }
-
-  // ElevatedButton dayButton(day) {
-  //   return ElevatedButton(
-  //     onPressed: () {},
-  //     child: Text(day, style: TextStyle(color: Colors.black),),
-  //     style: ElevatedButton.styleFrom(
-  //       backgroundColor: Color(0x80D3BFF9),
-  //       shape: CircleBorder()),
-
-  //   );
-  // }
 }
+
+enum DayButtomMode { dateOfWeek, dayOfMonth }
