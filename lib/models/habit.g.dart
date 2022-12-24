@@ -12,7 +12,7 @@ _$_Habit _$$_HabitFromJson(Map<String, dynamic> json) => _$_Habit(
       action: json['action'] as String,
       value: json['value'] as int,
       progress: json['progress'] as int? ?? 0,
-      unit: json['unit'] as String?,
+      unit: json['unit'] as String,
       time: const TimeStringToTimeOfDayConverter()
           .fromJson(json['time'] as String),
       startDate: const DateStringToDateTimeConverter()

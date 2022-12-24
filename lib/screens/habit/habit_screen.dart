@@ -17,7 +17,7 @@ class HabitScreen extends StatefulWidget {
 
 class _HabitScreenState extends State<HabitScreen> {
   final _mockData = Future<List<Habit>>.delayed(
-    const Duration(seconds: 3),
+    const Duration(seconds: 1),
     () => HabitRepo.habitList,
   );
 
@@ -26,18 +26,21 @@ class _HabitScreenState extends State<HabitScreen> {
     return Scaffold(
       body: Column(
         children: [
-          const Header(),
-          Expanded(
+          const CalenderHeader(),
+          Flexible(
             child: FutureBuilder(
               future: _mockData,
               builder: ((context, snapshot) {
                 if (snapshot.hasData) {
-                  return SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: snapshot.data!
-                          .map((e) => HabitRecordTile(title: e.title))
-                          .toList(),
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 5.0),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: snapshot.data!
+                            .map((e) => HabitRecordTile(habit: e))
+                            .toList(),
+                      ),
                     ),
                   );
                 } else if (snapshot.hasError) {

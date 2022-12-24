@@ -5,8 +5,8 @@ import 'package:intl/intl.dart';
 // 달력기능. 클릭했을 때 달력이 만들어져서 보여야되고, 다시 클릭하면 원상복구됨.
 // 날짜를 찾아서 클릭했을 때 go_router를 통해 해당 날짜로 이동할 수 있어야함.
 
-class Header extends StatelessWidget {
-  const Header({super.key});
+class CalenderHeader extends StatelessWidget {
+  const CalenderHeader({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,10 +18,9 @@ class Header extends StatelessWidget {
             const BorderRadius.vertical(bottom: Radius.circular(20.0)),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.5),
-            spreadRadius: 5,
-            blurRadius: 7,
-            offset: const Offset(0, 0),
+            color: Colors.grey.withOpacity(0.3),
+            spreadRadius: 3,
+            blurRadius: 5,
           )
         ],
         color: Theme.of(context).backgroundColor,
@@ -37,8 +36,8 @@ class Header extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-            padding: EdgeInsets.only(
-                top: MediaQuery.of(context).padding.top)), // 상태바 높이 패딩
+          padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+        ), // 상태바 높이 패딩
         const Text(
           '안녕하세요 !',
           textAlign: TextAlign.left,
@@ -56,17 +55,24 @@ class Header extends StatelessWidget {
                       const TextSpan(
                           text: '오늘도 힘차게 ',
                           style: TextStyle(
-                              fontSize: 22, fontWeight: FontWeight.bold)),
+                            fontSize: 22,
+                            fontWeight: FontWeight.bold,
+                          )),
                       TextSpan(
-                          text: '다해 ',
-                          style: TextStyle(
-                              fontSize: 22,
-                              fontWeight: FontWeight.bold,
-                              color: Theme.of(context).highlightColor)),
+                        text: '다해 ',
+                        style: TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).highlightColor,
+                        ),
+                      ),
                       const TextSpan(
-                          text: '볼까요?',
-                          style: TextStyle(
-                              fontSize: 22, fontWeight: FontWeight.bold)),
+                        text: '볼까요?',
+                        style: TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -76,7 +82,7 @@ class Header extends StatelessWidget {
           ],
         ),
         Text(
-          _currentDay(),
+          DateFormat('yyyy 년 MM 월 dd 일').format(DateTime.now()),
           textAlign: TextAlign.left,
           style: const TextStyle(fontSize: 12),
         ),
@@ -97,10 +103,9 @@ class Header extends StatelessWidget {
     );
   }
 
-  RawMaterialButton dayButton(day) {
+  Widget dayButton(String day) {
     return RawMaterialButton(
       onPressed: () {},
-      elevation: 2.0,
       fillColor: const Color(0x80D3BFF9),
       padding: const EdgeInsets.all(15.0),
       constraints: const BoxConstraints(),
@@ -119,11 +124,4 @@ class Header extends StatelessWidget {
 
   //   );
   // }
-
-  String _currentDay() {
-    DateTime now = DateTime.now();
-    DateTime today = DateTime(now.year, now.month, now.day);
-
-    return DateFormat('yyyy 년 MM 월 dd 일').format(today);
-  }
 }
