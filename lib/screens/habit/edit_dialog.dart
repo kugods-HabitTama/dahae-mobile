@@ -81,63 +81,59 @@ class _EditDialogState extends State<EditDialog> {
               hintText: "해빗 네임",
             ),
           ),
-          Container(
-            child: Column(
-              children: [
-                Text(
-                  "실천 요일 *",
-                  style: Theme.of(context).textTheme.bodyText2,
-                ),
-                const Text("M T W T F S S"),
-              ],
-            ),
+          Column(
+            children: [
+              Text(
+                "실천 요일 *",
+                style: Theme.of(context).textTheme.bodyText2,
+              ),
+              const Text("M T W T F S S"),
+            ],
           ),
-          Container(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "해빗 상세정보 *",
-                  style: Theme.of(context).textTheme.bodyText2,
-                ),
-                textBox(context, 170.0, 0.0),
-                Row(
-                  children: [
-                    textBox(context, 60.0, 10.0),
-                    textBox(context, 60.0, 0.0),
-                  ],
-                ),
-                Divider(
-                  thickness: 1,
-                  height: 1,
-                  color: Theme.of(context).primaryColor.withOpacity(0.7),
-                ),
-                Text(
-                  "실천 기간",
-                  style: Theme.of(context).textTheme.bodyText2,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    textBox(context, 100.0, 0.0),
-                    Text(
-                      "~",
-                      style: Theme.of(context).textTheme.bodyText2,
-                    ),
-                    textBox(context, 100.0, 0.0),
-                  ],
-                ),
-                Row(
-                  children: [
-                    textBox(context, 140.0, 10.0),
-                    CupertinoSwitch(
-                      value: timeSet,
-                      onChanged: (value) => setState(() => timeSet = !timeSet),
-                    )
-                  ],
-                )
-              ],
-            ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "해빗 상세정보 *",
+                style: Theme.of(context).textTheme.bodyText2,
+              ),
+              textBox(context, 170.0, 0.0),
+              Row(
+                children: [
+                  textBox(context, 60.0, 10.0),
+                  textBox(context, 60.0, 0.0),
+                ],
+              ),
+              Divider(
+                thickness: 1,
+                height: 1,
+                color: Theme.of(context).primaryColor.withOpacity(0.7),
+              ),
+              Text(
+                "실천 기간",
+                style: Theme.of(context).textTheme.bodyText2,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  textBox(context, 100.0, 0.0),
+                  Text(
+                    "~",
+                    style: Theme.of(context).textTheme.bodyText2,
+                  ),
+                  textBox(context, 100.0, 0.0),
+                ],
+              ),
+              Row(
+                children: [
+                  textBox(context, 140.0, 10.0),
+                  CupertinoSwitch(
+                    value: timeSet,
+                    onChanged: (value) => setState(() => timeSet = !timeSet),
+                  )
+                ],
+              )
+            ],
           ),
         ],
       ),
