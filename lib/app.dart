@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-
 import 'package:go_router/go_router.dart';
 
 import 'screens/screens.dart';
 
+// ShellRoute를 위한 Key설정
 GlobalKey<NavigatorState> _rootkey = GlobalKey<NavigatorState>();
 GlobalKey<NavigatorState> _homekey = GlobalKey<NavigatorState>();
 
@@ -16,7 +16,9 @@ class DahaeApp extends StatelessWidget {
       routerConfig: _router,
       theme: _theme,
       builder: (context, child) => ScrollConfiguration(
-          behavior: DiableScrollGlow(), child: child ?? Container()),
+        behavior: DiableScrollGlow(),
+        child: child ?? Container(),
+      ),
     );
   }
 
@@ -48,7 +50,7 @@ class DahaeApp extends StatelessWidget {
           GoRoute(
             path: '/habit/:year(\\d+)/:month(\\d+)/:day(\\d+)',
             builder: (context, state) => HabitScreen(
-              dateTime: DateTime(
+              selectedDate: DateTime(
                 int.parse(state.params['year']!),
                 int.parse(state.params['month']!),
                 int.parse(state.params['day']!),
@@ -88,6 +90,7 @@ class DahaeApp extends StatelessWidget {
   );
 }
 
+// 기본적으로 SingleChildScrollView에서 파란색으로 빛나는 것 없애기 위한 코드
 class DiableScrollGlow extends ScrollBehavior {
   @override
   Widget buildOverscrollIndicator(

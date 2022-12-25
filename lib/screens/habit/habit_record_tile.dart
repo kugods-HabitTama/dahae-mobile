@@ -1,14 +1,11 @@
-import 'package:dahae_mobile/models/habit_record.dart';
-import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:dahae_mobile/screens/habit/edit_dialog.dart';
 import 'dart:math';
 
-// Todo
-// HabitRecord 객체를 입력받아 '메인 페이지'에 있는 HabitTile을 구현합니다.
-// 클릭하면 입력 필드가 나와서 얼마나 했는지 작성할 수 있어야 합니다.
-// 수정버튼을 누르면 내부에 있는 HabitRecord의 Habit을 찾아 해당 Habit을 수정할 수 있는
-// 팝업을 띄울 수 있어야 합니다.
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+
+import '../../models/habit_record.dart';
+import 'edit_dialog.dart';
+
 class HabitRecordTile extends StatefulWidget {
   final HabitRecord habitRecord;
 

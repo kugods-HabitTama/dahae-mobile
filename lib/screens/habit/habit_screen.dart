@@ -1,54 +1,31 @@
-import 'package:dahae_mobile/api/api.dart';
-import 'package:dahae_mobile/models/habit.dart';
-import 'package:dahae_mobile/models/habit_record.dart';
 import 'package:flutter/material.dart';
 
+import '../../api/api.dart';
+import '../../models/habit.dart';
+import '../../models/habit_record.dart';
 import 'all_habit_dropdown.dart';
 import 'calender_header.dart';
 import 'habit_record_tile.dart';
 
 class HabitScreen extends StatefulWidget {
-  final DateTime dateTime;
+  final DateTime selectedDate;
 
-  const HabitScreen({super.key, required this.dateTime});
+  const HabitScreen({super.key, required this.selectedDate});
 
   @override
   State<HabitScreen> createState() => _HabitScreenState();
 }
 
 class _HabitScreenState extends State<HabitScreen> {
-  // final _mockData = Future<List<HabitList>>.delayed(
-  //   const Duration(seconds: 1),
-  //   () => HabitRepo.habitList,
-  // );
   late Future<List<HabitRecord>> habitRecords;
   late Future<List<Habit>> habits;
-
-  void _init() {
-    habitRecords = getHabitRecords(widget.dateTime);
-    habits = getHabits();
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _init();
-  }
-
-  @override
-  void didUpdateWidget(HabitScreen oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (oldWidget.dateTime != widget.dateTime) {
-      _init();
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
         children: [
-          CalenderHeader(selectedDate: widget.dateTime),
+          CalenderHeader(selectedDate: widget.selectedDate),
           Flexible(
             child: FutureBuilder(
               future: habitRecords,
@@ -83,7 +60,6 @@ class _HabitScreenState extends State<HabitScreen> {
           if (snapshot.hasData) {
             return AllHabitDropdown(habits: snapshot.data!);
           } else if (snapshot.hasError) {
-            debugPrint(snapshot.error.toString());
             return const Text('Error');
           } else {
             return const Text('loading');
@@ -91,5 +67,26 @@ class _HabitScreenState extends State<HabitScreen> {
         },
       ),
     );
+  }
+
+  @override
+  void didUpdateWidget(HabitScreen oldWidget) {
+    // 날짜 바뀌었을 때 맞춰서 서버에 요청 새로 보내는 것 결정
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.selectedDate != widget.selectedDate) {
+      _init();
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _init();
+  }
+
+  // 한번 실행될 때마다 서버에 요청으로 보낸다고 생각하면 편함
+  void _init() {
+    habitRecords = getHabitRecords(widget.selectedDate);
+    habits = getHabits();
   }
 }

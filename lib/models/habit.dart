@@ -1,9 +1,9 @@
-import 'package:dahae_mobile/models/converters.dart';
-import 'package:dahae_mobile/models/day_of_week.dart';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
+import 'converters.dart';
+import 'day_of_week.dart';
 
 part 'habit.freezed.dart';
 part 'habit.g.dart';

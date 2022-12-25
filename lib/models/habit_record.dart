@@ -1,7 +1,7 @@
-import 'habit.dart';
-
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
+import 'habit.dart';
 
 part 'habit_record.freezed.dart';
 part 'habit_record.g.dart';
