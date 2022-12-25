@@ -1,11 +1,10 @@
 import 'package:dahae_mobile/models/habit_record.dart';
+import 'package:dio/dio.dart';
 
-import 'habit_api.dart';
+import '../models/habit.dart';
 import 'api_consts.dart';
 import 'dio/dio_factory.dart';
-import '../models/habit.dart';
-
-import 'package:dio/dio.dart';
+import 'habit_api.dart';
 
 // 사용자의 모든 해빗을 가져오는 함수
 Future<List<Habit>> getHabits() async {

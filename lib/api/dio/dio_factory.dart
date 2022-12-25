@@ -3,9 +3,9 @@ import 'package:dio/dio.dart';
 // https://medium.com/tide-engineering-team/basic-and-advanced-networking-in-dart-and-flutter-the-tide-way-part-0-introduction-33ac040a4a1c
 // 위 링크를 참조하여 제작함.
 class DioFactory {
-  const DioFactory(this._baseUrl);
-
   final String _baseUrl;
+
+  const DioFactory(this._baseUrl);
 
   Dio create() => Dio(_createBaseOptions());
 

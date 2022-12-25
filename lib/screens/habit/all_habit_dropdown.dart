@@ -1,8 +1,8 @@
 import 'dart:math';
 
-import '../../models/habit.dart';
-
 import 'package:flutter/material.dart';
+
+import '../../models/habit.dart';
 
 class AllHabitDropdown extends StatefulWidget {
   final List<Habit> habits;
