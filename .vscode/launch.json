@@ -1,0 +1,13 @@
+{
+	"configurations": [
+		{
+			"name": "Development",
+			"type": "dart",
+			"request": "launch",
+			"program": "lib/main.dart",
+			"args": [
+				"--dart-define=BASE_URL=http://dahaedev-env.eba-qi6hngnz.ap-northeast-2.elasticbeanstalk.com/",
+			]
+		},
+	]
+}
