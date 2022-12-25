@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
 
+// https://medium.com/tide-engineering-team/basic-and-advanced-networking-in-dart-and-flutter-the-tide-way-part-0-introduction-33ac040a4a1c
+// 위 링크를 참조하여 제작함.
 class DioFactory {
   const DioFactory(this._baseUrl);
 
@@ -19,11 +21,5 @@ class DioFactory {
 
         // Timeout in milliseconds for opening url
         connectTimeout: 5000,
-
-        // Common query parameters for each request
-        // queryParameters: <String, dynamic>{'parameter1': 'value1'},
-
-        // Common headers for each request
-        // headers: <String, dynamic>{'header1': 'value1'},
       );
 }

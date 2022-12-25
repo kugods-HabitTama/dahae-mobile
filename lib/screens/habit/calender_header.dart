@@ -3,10 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
-// Todo
-// 달력기능. 클릭했을 때 달력이 만들어져서 보여야되고, 다시 클릭하면 원상복구됨.
-// 날짜를 찾아서 클릭했을 때 go_router를 통해 해당 날짜로 이동할 수 있어야함.
-
+// TODO: 클릭했을 때 달력이 만들어져서 보여야되고, 다시 클릭하면 원상복구됨.
 class CalenderHeader extends StatelessWidget {
   final DateTime selectedDate;
 
@@ -30,8 +27,9 @@ class CalenderHeader extends StatelessWidget {
         color: Theme.of(context).backgroundColor,
       ),
       child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
-          child: headerContent(context)),
+        padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
+        child: headerContent(context),
+      ),
     );
   }
 
@@ -57,11 +55,12 @@ class CalenderHeader extends StatelessWidget {
                   TextSpan(
                     children: [
                       const TextSpan(
-                          text: '오늘도 힘차게 ',
-                          style: TextStyle(
-                            fontSize: 22,
-                            fontWeight: FontWeight.bold,
-                          )),
+                        text: '오늘도 힘차게 ',
+                        style: TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                       TextSpan(
                         text: '다해 ',
                         style: TextStyle(
@@ -107,10 +106,11 @@ class CalenderHeader extends StatelessWidget {
     );
   }
 
-  Widget dayButton(
-      {required DateTime date,
-      required DayButtomMode dayButtomMode,
-      required BuildContext context}) {
+  Widget dayButton({
+    required DateTime date,
+    required DayButtomMode dayButtomMode,
+    required BuildContext context,
+  }) {
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);
     final isToday = date == today;

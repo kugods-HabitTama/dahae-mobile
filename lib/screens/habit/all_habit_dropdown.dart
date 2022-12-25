@@ -1,7 +1,7 @@
 import 'dart:math';
 
-import 'package:dahae_mobile/models/habit.dart';
-import 'package:dahae_mobile/mock/habit_repo.dart';
+import '../../models/habit.dart';
+
 import 'package:flutter/material.dart';
 
 class AllHabitDropdown extends StatefulWidget {
@@ -27,24 +27,22 @@ class _AllHabitDropdownState extends State<AllHabitDropdown> {
             topLeft: Radius.circular(6),
             topRight: Radius.circular(6),
             bottomLeft: Radius.circular(6),
-            bottomRight: Radius.circular(20),
-          )
+            bottomRight: Radius.circular(20))
         : const BorderRadius.all(Radius.circular(20));
 
     var allHabitList = _open
         ? SingleChildScrollView(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: widget.habits
-                  .map((e) => AllHabitDropdownTile(habit: e))
-                  .toList(),
-            ),
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: widget.habits
+                    .map((e) => AllHabitDropdownTile(habit: e))
+                    .toList()),
           )
         : null;
 
     var knobIcon = AnimatedRotation(
       turns: _open ? -0.25 : 0,
-      duration: const Duration(seconds: 1),
+      duration: const Duration(milliseconds: 100),
       child: Icon(
         Icons.menu,
         size: 26,
@@ -88,7 +86,7 @@ class _AllHabitDropdownState extends State<AllHabitDropdown> {
           padding: const EdgeInsets.all(4),
           height: height,
           width: width,
-          duration: const Duration(seconds: 1),
+          duration: const Duration(milliseconds: 100),
           child: allHabitList,
         ),
         knob,
@@ -122,10 +120,11 @@ class AllHabitDropdownTile extends StatelessWidget {
               child: Text(
                 habit.title,
                 style: const TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 18,
-                    color: Color(0xFF0F0324),
-                    overflow: TextOverflow.ellipsis),
+                  fontWeight: FontWeight.w600,
+                  fontSize: 18,
+                  color: Color(0xFF0F0324),
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
             ),
           ],
