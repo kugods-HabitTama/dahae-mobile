@@ -82,7 +82,7 @@ class DahaeApp extends StatelessWidget {
         fontSize: 16,
       ),
       bodyText2: TextStyle(
-        color: Color(0xFF432876),
+        color: Color(0xFF0F0324),
         fontWeight: FontWeight.w700,
         fontSize: 16,
       ),
