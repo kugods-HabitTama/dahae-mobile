@@ -17,7 +17,7 @@ class CalenderHeader extends StatelessWidget {
       height: 248,
       decoration: BoxDecoration(
         borderRadius:
-            const BorderRadius.vertical(bottom: Radius.circular(20.0)),
+          const BorderRadius.vertical(bottom: Radius.circular(20.0)),
         boxShadow: [
           BoxShadow(
             color: Colors.grey.withOpacity(0.3),
@@ -30,28 +30,49 @@ class CalenderHeader extends StatelessWidget {
       child: Stack(
         alignment: Alignment.center,
         children: [
-          Positioned(
-            top: 239,
-            child: Opacity(
-              opacity: 0.4,
-              child: GestureDetector(
-                onTap: () => print('expanded!'),
-                child: Container(
-                  width: 40,
-                  height: 3,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(1.5)),
-                )
-              ),
-            )
-          ),
+          expandingButton(context),
           Padding(
             padding: const EdgeInsets.fromLTRB(22, 29, 22, 29),
             child: headerContent(context),
           )
         ]
       )
+    );
+  }
+
+  Positioned expandingButton(BuildContext context) {
+    return Positioned(
+      top: 220,
+      child: GestureDetector(
+        onTap: () => print('expanded!'),
+        behavior: HitTestBehavior.translucent,
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            Opacity(
+              opacity: 0,
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                height: 28,
+                decoration: const BoxDecoration(
+                  color: Colors.red, // test color
+                  borderRadius: BorderRadius.vertical(bottom: Radius.circular(20.0))
+                )
+              ),
+            ),
+            Positioned(
+              top: 17,
+              child: Container(
+                  width: 40,
+                  height: 3,
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.4),
+                    borderRadius: BorderRadius.circular(1.5)),
+                )
+            ),
+          ],
+        )
+      ),
     );
   }
 
@@ -111,7 +132,7 @@ class CalenderHeader extends StatelessWidget {
           textAlign: TextAlign.left,
           style: const TextStyle(fontSize: 12),
         ),
-        const SizedBox(height: 10), // 간격 띄우기
+        const SizedBox(height: 13), // 간격 띄우기
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: List.generate(
