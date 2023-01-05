@@ -48,9 +48,10 @@ class _CalenderHeaderState extends State<CalenderHeader> {
     );
   }
 
-  Positioned expandingButton(BuildContext context) {
-    return Positioned(
-      top: 220,
+  AnimatedPositioned expandingButton(BuildContext context) {
+    return AnimatedPositioned(
+      duration: const Duration(milliseconds: 200),
+      top: _expanded? 459: 220,
       child: GestureDetector(
         onTap: (() {
         setState(() {
