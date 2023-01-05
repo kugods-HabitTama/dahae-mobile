@@ -14,7 +14,7 @@ class CalenderHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      //height: 180,
+      height: 248,
       decoration: BoxDecoration(
         borderRadius:
             const BorderRadius.vertical(bottom: Radius.circular(20.0)),
@@ -27,10 +27,31 @@ class CalenderHeader extends StatelessWidget {
         ],
         color: Theme.of(context).backgroundColor,
       ),
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
-        child: headerContent(context),
-      ),
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          Positioned(
+            top: 239,
+            child: Opacity(
+              opacity: 0.4,
+              child: GestureDetector(
+                onTap: () => print('expanded!'),
+                child: Container(
+                  width: 40,
+                  height: 3,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(1.5)),
+                )
+              ),
+            )
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(22, 29, 22, 29),
+            child: headerContent(context),
+          )
+        ]
+      )
     );
   }
 
@@ -82,7 +103,7 @@ class CalenderHeader extends StatelessWidget {
                 ),
               ],
             ),
-            const Image(image: AssetImage('assets/images/logo.png'))
+            const Image(image: AssetImage('assets/images/logo.png'), height: 31)
           ],
         ),
         Text(
