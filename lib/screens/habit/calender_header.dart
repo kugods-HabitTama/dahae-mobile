@@ -5,16 +5,24 @@ import 'package:intl/intl.dart';
 import '../../models/day_of_week.dart';
 
 // TODO: 클릭했을 때 달력이 만들어져서 보여야되고, 다시 클릭하면 원상복구됨.
-class CalenderHeader extends StatelessWidget {
+class CalenderHeader extends StatefulWidget {
   final DateTime selectedDate;
 
   const CalenderHeader({super.key, required this.selectedDate});
 
   @override
+  State<CalenderHeader> createState() => _CalenderHeaderState();
+}
+
+class _CalenderHeaderState extends State<CalenderHeader> {
+  bool _expanded = false;
+
+  @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      height: 248,
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 200),
+      width: MediaQuery.of(context).size.width,
+      height: _expanded? 487: 248,
       decoration: BoxDecoration(
         borderRadius:
           const BorderRadius.vertical(bottom: Radius.circular(20.0)),
@@ -44,7 +52,11 @@ class CalenderHeader extends StatelessWidget {
     return Positioned(
       top: 220,
       child: GestureDetector(
-        onTap: () => print('expanded!'),
+        onTap: (() {
+        setState(() {
+          _expanded = !_expanded;
+        });
+      }),
         behavior: HitTestBehavior.translucent,
         child: Stack(
           alignment: Alignment.center,
@@ -128,7 +140,7 @@ class CalenderHeader extends StatelessWidget {
           ],
         ),
         Text(
-          DateFormat('yyyy 년 MM 월 dd 일').format(selectedDate),
+          DateFormat('yyyy 년 MM 월 dd 일').format(widget.selectedDate),
           textAlign: TextAlign.left,
           style: const TextStyle(fontSize: 12),
         ),
@@ -138,8 +150,8 @@ class CalenderHeader extends StatelessWidget {
           children: List.generate(
             7,
             (index) => dayButton(
-              date: selectedDate
-                  .add(Duration(days: index - selectedDate.weekday + 1)),
+              date: widget.selectedDate
+                  .add(Duration(days: index - widget.selectedDate.weekday + 1)),
               dayButtomMode: DayButtomMode.dateOfWeek,
               context: context,
             ),
@@ -157,7 +169,7 @@ class CalenderHeader extends StatelessWidget {
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);
     final isToday = date == today;
-    final isSelected = date == selectedDate;
+    final isSelected = date == widget.selectedDate;
     final backgroundColor = isSelected
         ? const Color(0xFFC4F954)
         : isToday
