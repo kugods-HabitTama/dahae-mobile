@@ -248,19 +248,6 @@ class _CalenderHeaderState extends State<CalenderHeader> {
             }).toList()
           ),
         ),
-        
-        // Row(
-        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //   children: List.generate(
-        //     7,
-        //     (index) => dayButton(
-        //       date: widget.selectedDate
-        //           .add(Duration(days: index - widget.selectedDate.weekday)), // 일월화수목금토 순서
-        //       dayButtomMode: DayButtomMode.dayOfMonth,
-        //       context: context,
-        //     ),
-        //   ),
-        // )
       ],
     );
   }
