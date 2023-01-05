@@ -16,6 +16,7 @@ class CalenderHeader extends StatefulWidget {
 
 class _CalenderHeaderState extends State<CalenderHeader> {
   bool _expanded = false;
+  var week1 = ['일', '월', '화', '수', '목', '금', '토'];
 
   @override
   Widget build(BuildContext context) {
@@ -40,8 +41,10 @@ class _CalenderHeaderState extends State<CalenderHeader> {
         children: [
           expandingButton(context),
           Padding(
-            padding: const EdgeInsets.fromLTRB(22, 29, 22, 29),
-            child: headerContent(context),
+            padding: _expanded
+              ? const EdgeInsets.fromLTRB(40, 29, 40, 29)
+              : const EdgeInsets.fromLTRB(22, 29, 22, 29),
+            child: _expanded? headerContentMonth(context) : headerContentWeek(context),
           )
         ]
       )
@@ -89,7 +92,8 @@ class _CalenderHeaderState extends State<CalenderHeader> {
     );
   }
 
-  Column headerContent(BuildContext context) {
+  // 맨 처음 요일이 표기된 메뉴
+  Column headerContentWeek(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -185,11 +189,79 @@ class _CalenderHeaderState extends State<CalenderHeader> {
           shape: BoxShape.circle,
           color: backgroundColor,
         ),
-        padding: const EdgeInsets.all(15.0),
+        padding: dayButtomMode == DayButtomMode.dateOfWeek
+          ? const EdgeInsets.all(15.0)
+          : const EdgeInsets.all(15.0),
         child: dayButtomMode == DayButtomMode.dateOfWeek
-            ? Text(DayOfWeek.koreanFormat(date.weekday - 1))
-            : Text('${date.day}'),
+            ? Text(DayOfWeek.koreanFormat(date.weekday - 1),
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w300,)
+            )
+            : Text('${date.day}',
+              style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w300,)
+            ),
       ),
+    );
+  }
+
+  Column headerContentMonth(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+        ), // 상태바 높이 패딩
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Text(
+              DateFormat('yyyy 년 MM 월 dd 일').format(widget.selectedDate),
+              textAlign: TextAlign.left,
+              style: const TextStyle(fontSize: 22),
+            ),
+            const SizedBox(width: 12,),
+            const Image(image: AssetImage('assets/images/logo.png'), height: 24)
+          ],
+        ),
+        const SizedBox(height: 42,),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 13), // 정렬 먼가 이상함 ..
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: List.generate(
+              7, 
+              (index) => Text(week1[index], 
+                style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500)
+              ))
+          )
+        ),
+        Expanded(
+          child: GridView.count(
+            padding: EdgeInsets.zero,
+            crossAxisCount: 7,  // 열 개수
+            children: List<Widget>.generate(35, (index) {
+              return dayButton(
+                date: widget.selectedDate
+                  .add(Duration(days: index - widget.selectedDate.day + 1)), // 일월화수목금토 순서
+                dayButtomMode: DayButtomMode.dayOfMonth,
+                context: context,
+              );
+            }).toList()
+          ),
+        ),
+        
+        // Row(
+        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //   children: List.generate(
+        //     7,
+        //     (index) => dayButton(
+        //       date: widget.selectedDate
+        //           .add(Duration(days: index - widget.selectedDate.weekday)), // 일월화수목금토 순서
+        //       dayButtomMode: DayButtomMode.dayOfMonth,
+        //       context: context,
+        //     ),
+        //   ),
+        // )
+      ],
     );
   }
 }
