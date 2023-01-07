@@ -15,15 +15,14 @@ class CalenderHeader extends StatefulWidget {
 }
 
 class _CalenderHeaderState extends State<CalenderHeader> {
-  bool _expanded = false;
-  var week1 = ['일', '월', '화', '수', '목', '금', '토'];
+  bool _week = true;
 
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 200),
       width: MediaQuery.of(context).size.width,
-      height: _expanded? 487: 248,
+      height: _week? 248: 487,
       decoration: BoxDecoration(
         borderRadius:
           const BorderRadius.vertical(bottom: Radius.circular(20.0)),
@@ -41,10 +40,10 @@ class _CalenderHeaderState extends State<CalenderHeader> {
         children: [
           expandingButton(context),
           Padding(
-            padding: _expanded
-              ? const EdgeInsets.fromLTRB(40, 29, 40, 29)
-              : const EdgeInsets.fromLTRB(22, 29, 22, 29),
-            child: _expanded? headerContentMonth(context) : headerContentWeek(context),
+            padding: _week
+              ? const EdgeInsets.fromLTRB(22, 29, 22, 29)
+              : const EdgeInsets.fromLTRB(40, 29, 40, 29),
+            child: _week? headerContentWeek(context) : headerContentMonth(context),
           )
         ]
       )
@@ -54,11 +53,11 @@ class _CalenderHeaderState extends State<CalenderHeader> {
   AnimatedPositioned expandingButton(BuildContext context) {
     return AnimatedPositioned(
       duration: const Duration(milliseconds: 200),
-      top: _expanded? 459: 220,
+      top: _week? 220: 459,
       child: GestureDetector(
         onTap: (() {
         setState(() {
-          _expanded = !_expanded;
+          _week = !_week;
         });
       }),
         behavior: HitTestBehavior.translucent,
@@ -159,6 +158,7 @@ class _CalenderHeaderState extends State<CalenderHeader> {
                   .add(Duration(days: index - widget.selectedDate.weekday + 1)),
               dayButtomMode: DayButtomMode.dateOfWeek,
               context: context,
+              isEmpty: false,
             ),
           ),
         )
@@ -166,44 +166,10 @@ class _CalenderHeaderState extends State<CalenderHeader> {
     );
   }
 
-  Widget dayButton({
-    required DateTime date,
-    required DayButtomMode dayButtomMode,
-    required BuildContext context,
-  }) {
-    final now = DateTime.now();
-    final today = DateTime(now.year, now.month, now.day);
-    final isToday = date == today;
-    final isSelected = date == widget.selectedDate;
-    final backgroundColor = isSelected
-        ? const Color(0xFFC4F954)
-        : isToday
-            ? const Color(0xFFD3BFF9)
-            : const Color(0x80D3BFF9);
-
-    return GestureDetector(
-      onTap: () => GoRouter.of(context)
-          .go('/habit/${DateFormat('yyyy/MM/dd').format(date)}'),
-      child: Container(
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: backgroundColor,
-        ),
-        padding: dayButtomMode == DayButtomMode.dateOfWeek
-          ? const EdgeInsets.all(15.0)
-          : const EdgeInsets.all(15.0),
-        child: dayButtomMode == DayButtomMode.dateOfWeek
-            ? Text(DayOfWeek.koreanFormat(date.weekday - 1),
-              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w300,)
-            )
-            : Text('${date.day}',
-              style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w300,)
-            ),
-      ),
-    );
-  }
-
   Column headerContentMonth(BuildContext context) {
+    var week1 = ['일', '월', '화', '수', '목', '금', '토'];
+    var monthDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    DateTime firstDay = DateTime(widget.selectedDate.year, widget.selectedDate.month, 1);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -236,20 +202,81 @@ class _CalenderHeaderState extends State<CalenderHeader> {
         ),
         Expanded(
           child: GridView.count(
+            //shrinkWrap: true,
             padding: EdgeInsets.zero,
             crossAxisCount: 7,  // 열 개수
-            children: List<Widget>.generate(35, (index) {
-              return dayButton(
-                date: widget.selectedDate
-                  .add(Duration(days: index - widget.selectedDate.day + 1)), // 일월화수목금토 순서
-                dayButtomMode: DayButtomMode.dayOfMonth,
-                context: context,
-              );
-            }).toList()
+            children: List<Widget>.generate(
+              monthDays[widget.selectedDate.month - 1] + firstDay.weekday % 7, 
+              (index) {
+                return dayButton(
+                  date: widget.selectedDate // 일월화수목금토 순서
+                    .add(Duration(days: index - firstDay.weekday % 7 - widget.selectedDate.day + 1)),
+                  dayButtomMode: DayButtomMode.dayOfMonth,
+                  context: context,
+                  isEmpty: index >= firstDay.weekday % 7 ? false: true,
+                );
+              }
+            ).toList()
           ),
         ),
       ],
     );
+  }
+
+  Widget dayButton({
+    required DateTime date,
+    required DayButtomMode dayButtomMode,
+    required BuildContext context,
+    required bool isEmpty,
+  }) {
+    final now = DateTime.now();
+    final today = DateTime(now.year, now.month, now.day);
+    final isToday = date == today;
+    final isSelected = date == widget.selectedDate;
+    final backgroundColor = isSelected
+        ? const Color(0xFFC4F954)
+        : isToday
+            ? const Color(0xFFD3BFF9)
+            : const Color(0x80D3BFF9);
+    
+    if (isEmpty) {
+      return const Padding(
+        padding: EdgeInsets.all(5.5),
+        child: SizedBox(
+          height: 35,
+          width: 35,
+        )
+      );
+    }
+    else {
+      return GestureDetector(
+        onTap: () => GoRouter.of(context)
+            .go('/habit/${DateFormat('yyyy/MM/dd').format(date)}'),
+        child: Padding(
+          padding: dayButtomMode == DayButtomMode.dateOfWeek
+              ? const EdgeInsets.all(0.0)
+              : const EdgeInsets.all(5.5),
+          child: Container(
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: backgroundColor,
+            ),
+            padding: dayButtomMode == DayButtomMode.dateOfWeek
+              ? const EdgeInsets.all(14.5)
+              : const EdgeInsets.all(10.0),
+            child: dayButtomMode == DayButtomMode.dateOfWeek
+              ? Text(DayOfWeek.koreanFormat(date.weekday - 1),
+                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w300,),
+                textAlign: TextAlign.center,
+              )
+              : Text('${date.day}',
+                style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w300,),
+                textAlign: TextAlign.center,
+              ),
+          ),
+        ),
+      );
+    }
   }
 }
 
