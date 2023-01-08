@@ -12,7 +12,7 @@ class HabitRecord with _$HabitRecord {
 
   const factory HabitRecord({
     required Habit habit,
-    @Default(0) int progress,
+    required int progress,
   }) = _HabitRecord;
 
   factory HabitRecord.fromJson(Map<String, dynamic> json) =>
