@@ -102,53 +102,54 @@ class _PushAlarmSetBoxState extends State<PushAlarmSetBox> {
   }
 }
 
-class LogoutBox extends StatelessWidget {
-  const LogoutBox({super.key});
+class ProfileBottomBox extends StatelessWidget {
+  const ProfileBottomBox({
+    Key? key,
+    required this.text,
+    required this.outlined,
+  }) : super(key: key);
+
+  final String text;
+  final bool outlined;
 
   @override
   Widget build(BuildContext context) {
+    var textTheme = outlined
+        ? const TextStyle(
+            fontSize: 15,
+            color: Color(0xFF925FF0),
+            fontWeight: FontWeight.w600,
+          )
+        : const TextStyle(
+            color: Color(0xFFD9D9D9),
+            fontSize: 15,
+            fontWeight: FontWeight.w600,
+          );
+
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
       height: 35,
       alignment: Alignment.center,
       decoration: BoxDecoration(
-          color: Theme.of(context).highlightColor,
+          color: outlined
+              ? Theme.of(context).backgroundColor
+              : Theme.of(context).highlightColor,
+          border: Border.all(color: Theme.of(context).highlightColor, width: 1),
           borderRadius: const BorderRadius.all(Radius.circular(6))),
-      child: const Text(
-        '로그아웃',
-        style: TextStyle(
-          color: Color(0xFFD9D9D9),
-          fontSize: 15,
-          fontWeight: FontWeight.w600,
-        ),
-        //textAlign: TextAlign.center,
+      child: Text(
+        text,
+        style: textTheme,
+        textAlign: TextAlign.center,
       ),
     );
   }
 }
 
-class DeleteAccountBox extends StatelessWidget {
-  const DeleteAccountBox({super.key});
+class MyWidget extends StatelessWidget {
+  const MyWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
-      height: 35,
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-          color: Theme.of(context).backgroundColor,
-          border: Border.all(color: Theme.of(context).highlightColor, width: 1),
-          borderRadius: const BorderRadius.all(Radius.circular(6))),
-      child: const Text(
-        '계정 삭제',
-        style: TextStyle(
-          fontSize: 15,
-          color: Color(0xFF925FF0), //Theme.of(context).highlightColor,
-          fontWeight: FontWeight.w600,
-        ),
-        textAlign: TextAlign.center,
-      ),
-    );
+    return Container();
   }
 }
