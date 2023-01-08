@@ -52,8 +52,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const LogoutBox(),
-                const DeleteAccountBox(),
+                const ProfileBottomBox(text: '로그아웃', outlined: false),
+                const ProfileBottomBox(text: '계정 삭제', outlined: true),
               ],
             ),
           ),
