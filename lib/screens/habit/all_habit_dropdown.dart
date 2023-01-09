@@ -110,22 +110,27 @@ class AllHabitDropdownTile extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         showDialog(
-            context: context,
-            builder: (context) {
-              return BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 3.5, sigmaY: 3.5),
-                child: EditDialog(
-                  title: habit.title,
-                  days: habit.days,
-                  action: habit.action,
-                  value: habit.value,
-                  unit: habit.unit,
-                  startDate: habit.startDate,
-                  endDate: habit.endDate,
-                ),
-                // child: MyDialog(itemTitle: habit.title),
-              );
-            });
+          context: context,
+          builder: (context) {
+            return BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 3.5, sigmaY: 3.5),
+              child: EditDialog(
+                habit: habit,
+                // title: habit.title,
+                // days: habit.days,
+                // action: habit.action,
+                // value: habit.value,
+                // unit: habit.unit,
+                // startDate: habit.startDate,
+                // endDate: habit.endDate,
+              ),
+              // child: MyDialog(itemTitle: habit.title),
+            );
+          },
+        );
+      },
+      onLongPress: () {
+        print(habit.days);
       },
       child: Padding(
         padding: const EdgeInsets.all(4.0),

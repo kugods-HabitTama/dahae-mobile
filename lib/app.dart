@@ -78,6 +78,11 @@ class DahaeApp extends StatelessWidget {
     focusColor: const Color(0xFFC4F954),
     hintColor: const Color(0xFF969696),
     textTheme: const TextTheme(
+        subtitle2: TextStyle(
+          color: Color(0xFF432876),
+          fontWeight: FontWeight.w700,
+          fontSize: 14,
+        ),
         bodyText1: TextStyle(
           color: Color(0xFF432876),
           fontWeight: FontWeight.w500,
