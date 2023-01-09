@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'profile_header.dart';
+import 'profile_setting.dart';
 import 'profile_box.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -20,29 +21,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           // profile 내용
-          const ProfileHeader(),
+          ProfileHeader(),
           // 환경설정 text
-          Container(
-              alignment: Alignment.centerLeft,
-              margin: const EdgeInsets.fromLTRB(30, 10, 25, 5),
-              height: 25,
-              child: const Text(
-                '환경설정',
-                style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
-              )),
+          const SettingText(),
           // 환경설정 list
-          Flexible(
-            child: Expanded(
-                child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  NoticeBox(),
-                  AppInfoBox(),
-                  PushAlarmSetBox(),
-                ],
-              ),
-            )),
+          const Flexible(
+            child: Expanded(child: SettingScroll()),
           ),
           //로그아웃 및 계정삭제 BOX
           Container(
@@ -51,9 +35,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
             color: Theme.of(context).backgroundColor,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                const ProfileBottomBox(text: '로그아웃', outlined: false),
-                const ProfileBottomBox(text: '계정 삭제', outlined: true),
+              children: const [
+                ProfileBottomBox(text: '로그아웃', outlined: false),
+                ProfileBottomBox(text: '계정 삭제', outlined: true),
               ],
             ),
           ),

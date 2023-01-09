@@ -1,38 +1,32 @@
-import 'package:flutter/cupertino.dart';
+import 'package:dahae_mobile/screens/screens_consts.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-class NoticeBox extends StatelessWidget {
-  const NoticeBox({super.key});
+class SettingText extends StatelessWidget {
+  const SettingText({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 50,
-        margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-        decoration: BoxDecoration(
-          color: Theme.of(context).primaryColor,
-          borderRadius: const BorderRadius.all(Radius.circular(6)),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SizedBox(
-                width: 50,
-                child: Icon(Icons.speaker,
-                    color: Theme.of(context).highlightColor)),
-            const Expanded(child: Text('공지사항', style: TextStyle(fontSize: 14))),
-            SizedBox(
-                width: 70,
-                child: Icon(Icons.arrow_forward_ios,
-                    color: Theme.of(context).highlightColor))
-          ],
+        alignment: Alignment.centerLeft,
+        margin: const EdgeInsets.fromLTRB(30, 10, 25, 5),
+        height: 25,
+        child: const Text(
+          '환경설정',
+          style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
         ));
   }
 }
 
-class AppInfoBox extends StatelessWidget {
-  const AppInfoBox({super.key});
+class SettingBox extends StatelessWidget {
+  const SettingBox({
+    Key? key,
+    required this.text,
+    required this.iconAddr,
+  }) : super(key: key);
+
+  final String text;
+  final String iconAddr;
 
   @override
   Widget build(BuildContext context) {
@@ -48,55 +42,12 @@ class AppInfoBox extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(
-                width: 50,
-                child: Icon(Icons.info_rounded,
-                    color: Theme.of(context).highlightColor)),
-            const Expanded(
-                child: Text('어플리케이션 정보', style: TextStyle(fontSize: 14))),
+                width: 50, child: Image.asset(iconAddr, width: 25, height: 25)),
+            Expanded(child: Text(text, style: const TextStyle(fontSize: 14))),
             SizedBox(
                 width: 70,
                 child: Icon(Icons.arrow_forward_ios,
                     color: Theme.of(context).highlightColor))
-          ],
-        ));
-  }
-}
-
-class PushAlarmSetBox extends StatefulWidget {
-  const PushAlarmSetBox({super.key});
-
-  @override
-  State<PushAlarmSetBox> createState() => _PushAlarmSetBoxState();
-}
-
-class _PushAlarmSetBoxState extends State<PushAlarmSetBox> {
-  bool alarmSet = false;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        height: 50,
-        margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-        decoration: BoxDecoration(
-          color: Theme.of(context).primaryColor,
-          borderRadius: const BorderRadius.all(Radius.circular(6)),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SizedBox(
-                width: 50,
-                child: Icon(Icons.notifications_active,
-                    color: Theme.of(context).highlightColor)),
-            const Expanded(
-                child: Text('푸쉬 알림 설정', style: TextStyle(fontSize: 14))),
-            SizedBox(
-                width: 70,
-                child: CupertinoSwitch(
-                    activeColor: Theme.of(context).highlightColor,
-                    value: alarmSet,
-                    onChanged: (value) => setState(() => alarmSet = !alarmSet)))
           ],
         ));
   }
@@ -145,11 +96,49 @@ class ProfileBottomBox extends StatelessWidget {
   }
 }
 
-class MyWidget extends StatelessWidget {
-  const MyWidget({super.key});
+class LinkBox extends StatefulWidget {
+  const LinkBox({
+    Key? key,
+    required this.url,
+    required this.box,
+  }) : super(key: key);
+
+  final String url;
+  final SettingBox box;
+
+  @override
+  State<LinkBox> createState() => _LinkBoxState(url, box);
+}
+
+class _LinkBoxState extends State<LinkBox> {
+  final String url;
+  final SettingBox box;
+
+  late Uri _url;
+
+  _LinkBoxState(this.url, this.box) {}
+
+  Future<void> _launchUrl() async {
+    if (!await launchUrl(_url)) {
+      throw 'Could not launch $_url';
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _url = ('Notice'.compareTo(url) == 0)
+        ? Uri.parse(ScreensConsts.dahaeNoticeUrl)
+        : ('AppInfo'.compareTo(url) == 0)
+            ? Uri.parse(ScreensConsts.dahaeInfoUrl)
+            : Uri.parse(url);
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return GestureDetector(
+      onTap: _launchUrl,
+      child: box,
+    );
   }
 }
