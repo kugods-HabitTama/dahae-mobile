@@ -107,52 +107,54 @@ class AllHabitDropdownTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(4.0),
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
-        decoration: BoxDecoration(
-          color: Theme.of(context).backgroundColor,
-          borderRadius: const BorderRadius.all(Radius.circular(6)),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Expanded(
-              child: Text(
-                habit.title,
-                style: const TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 18,
-                  color: Color(0xFF0F0324),
-                  overflow: TextOverflow.ellipsis,
+    return GestureDetector(
+      onTap: () {
+        showDialog(
+            context: context,
+            builder: (context) {
+              return BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 3.5, sigmaY: 3.5),
+                child: EditDialog(
+                  title: habit.title,
+                  days: habit.days,
+                  action: habit.action,
+                  value: habit.value,
+                  unit: habit.unit,
+                  startDate: habit.startDate,
+                  endDate: habit.endDate,
+                ),
+                // child: MyDialog(itemTitle: habit.title),
+              );
+            });
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(4.0),
+        child: Container(
+          padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
+          decoration: BoxDecoration(
+            color: Theme.of(context).backgroundColor,
+            borderRadius: const BorderRadius.all(Radius.circular(6)),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Text(
+                  habit.title,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 18,
+                    color: Color(0xFF0F0324),
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
               ),
-            ),
-            IconButton(
-              onPressed: () {
-                showDialog(
-                    context: context,
-                    builder: (context) {
-                      return BackdropFilter(
-                        filter: ImageFilter.blur(sigmaX: 3.5, sigmaY: 3.5),
-                        child: EditDialog(
-                          title: habit.title,
-                          days: habit.days,
-                          action: habit.action,
-                          value: habit.value,
-                          unit: habit.unit,
-                          startDate: habit.startDate,
-                          endDate: habit.endDate,
-                        ),
-                        // child: MyDialog(itemTitle: habit.title),
-                      );
-                    });
-              },
-              icon: const Icon(Icons.edit),
-              color: Theme.of(context).highlightColor,
-            ),
-          ],
+              Icon(
+                Icons.edit,
+                color: Theme.of(context).highlightColor,
+              ),
+            ],
+          ),
         ),
       ),
     );
