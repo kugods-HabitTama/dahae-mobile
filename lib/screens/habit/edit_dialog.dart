@@ -63,7 +63,7 @@ class _EditDialogState extends State<EditDialog> {
   contentBox(context) {
     return Container(
       // width: max(MediaQuery.of(context).size.width, 350),
-      height: MediaQuery.of(context).size.height - 400,
+      height: MediaQuery.of(context).size.height * 3 / 5,
       padding: const EdgeInsets.all(12.0),
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.all(Radius.circular(10.0)),
@@ -154,7 +154,7 @@ class _EditDialogState extends State<EditDialog> {
             ],
           ),
           Container(
-            color: Colors.green,
+            color: Colors.white54,
             padding: const EdgeInsets.only(right: 40),
             child: TextField(
               decoration: InputDecoration(
@@ -169,8 +169,12 @@ class _EditDialogState extends State<EditDialog> {
 
   daysBox(context) {
     return Container(
-      color: Colors.blueGrey,
+      color: Colors.white54,
+      margin: const EdgeInsets.only(
+        top: 20,
+      ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             "실천 요일 *",
@@ -185,7 +189,7 @@ class _EditDialogState extends State<EditDialog> {
   detailBox(context) {
     return Container(
       color: Colors.amber,
-      padding: const EdgeInsets.only(
+      margin: const EdgeInsets.only(
         top: 20,
         bottom: 20,
       ),
@@ -212,7 +216,7 @@ class _EditDialogState extends State<EditDialog> {
   periodBox(context) {
     return Container(
       color: Colors.cyan,
-      padding: const EdgeInsets.only(
+      margin: const EdgeInsets.only(
         top: 20,
         bottom: 20,
       ),
@@ -226,17 +230,17 @@ class _EditDialogState extends State<EditDialog> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              textBox(context, 100.0, 0.0, "temp"),
+              textBox(context, 130.0, 0.0, "temp"),
               Text(
                 "~",
                 style: Theme.of(context).textTheme.bodyText2,
               ),
-              textBox(context, 100.0, 0.0, "temp"),
+              textBox(context, 130.0, 0.0, "temp"),
             ],
           ),
           Row(
             children: [
-              textBox(context, 140.0, 10.0, "temp"),
+              textBox(context, 150.0, 10.0, "temp"),
               CupertinoSwitch(
                 value: timeSet,
                 onChanged: (value) => setState(() => timeSet = !timeSet),
