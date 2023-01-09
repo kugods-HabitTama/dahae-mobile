@@ -17,17 +17,19 @@ class HabitRecordTile extends StatefulWidget {
 
 class _HabitRecordTileState extends State<HabitRecordTile> {
   bool _open = false;
+  bool _onProgress = false;
+
   final percent = NumberFormat("##%");
 
-  Future<String?> openDialog() => showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return EditDialog(
-          title: widget.habitRecord.habit.title,
-          unit: widget.habitRecord.habit.unit,
-          value: widget.habitRecord.habit.value,
-        );
-      });
+  // Future<String?> openDialog() => showDialog(
+  //     context: context,
+  //     builder: (BuildContext context) {
+  //       return EditDialog(
+  //         title: widget.habitRecord.habit.title,
+  //         unit: widget.habitRecord.habit.unit,
+  //         value: widget.habitRecord.habit.value,
+  //       );
+  //     });
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +46,16 @@ class _HabitRecordTileState extends State<HabitRecordTile> {
             bottomLeft: Radius.circular(50),
             bottomRight: Radius.circular(6),
           );
+
+    var arrowIcon = AnimatedRotation(
+      turns: _open ? -0.25 : 0.25,
+      duration: const Duration(milliseconds: 100),
+      child: Icon(Icons.arrow_forward_ios,
+          size: 26,
+          color: _onProgress
+              ? Theme.of(context).highlightColor
+              : Theme.of(context).hintColor),
+    );
 
     Widget defaultTile = Container(
       margin: const EdgeInsets.only(top: 5),
@@ -104,13 +116,14 @@ class _HabitRecordTileState extends State<HabitRecordTile> {
               ],
             ),
           ),
-          IconButton(
-            onPressed: () {
-              openDialog();
-            },
-            icon: const Icon(Icons.arrow_forward_ios),
-          ),
-          //Icon(Icons.arrow_forward_ios)
+
+          arrowIcon,
+          // IconButton(
+          //   onPressed: () {
+          //     // openDialog();
+          //   },
+          //   icon: const Icon(Icons.arrow_forward_ios),
+          // ),
         ],
       ),
     );
@@ -153,12 +166,15 @@ class _HabitRecordTileState extends State<HabitRecordTile> {
                   ],
                 ),
               ),
-              IconButton(
-                onPressed: () {
-                  openDialog();
-                },
-                icon: const Icon(Icons.arrow_forward_ios),
-              ),
+              arrowIcon,
+              // IconButton(
+              //   onPressed: () {
+              //     setState(() {
+              //       _open = !_open;
+              //     });
+              //   },
+              //   icon: const Icon(Icons.arrow_forward_ios),
+              // ),
               //Icon(Icons.arrow_forward_ios)
             ],
           ),

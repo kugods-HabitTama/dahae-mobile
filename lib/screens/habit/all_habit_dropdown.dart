@@ -1,5 +1,7 @@
 import 'dart:math';
+import 'dart:ui';
 
+import 'package:dahae_mobile/screens/habit/edit_dialog.dart';
 import 'package:flutter/material.dart';
 
 import '../../models/habit.dart';
@@ -18,7 +20,7 @@ class _AllHabitDropdownState extends State<AllHabitDropdown> {
   @override
   Widget build(BuildContext context) {
     var height =
-        _open ? min(MediaQuery.of(context).size.height - 200, 400.0) : 40.0;
+        _open ? min(MediaQuery.of(context).size.height - 100, 570.0) : 40.0;
 
     var width = _open ? MediaQuery.of(context).size.width - 30 : 40.0;
 
@@ -126,6 +128,29 @@ class AllHabitDropdownTile extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
+            ),
+            IconButton(
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (context) {
+                      return BackdropFilter(
+                        filter: ImageFilter.blur(sigmaX: 3.5, sigmaY: 3.5),
+                        child: EditDialog(
+                          title: habit.title,
+                          days: habit.days,
+                          action: habit.action,
+                          value: habit.value,
+                          unit: habit.unit,
+                          startDate: habit.startDate,
+                          endDate: habit.endDate,
+                        ),
+                        // child: MyDialog(itemTitle: habit.title),
+                      );
+                    });
+              },
+              icon: const Icon(Icons.edit),
+              color: Theme.of(context).highlightColor,
             ),
           ],
         ),

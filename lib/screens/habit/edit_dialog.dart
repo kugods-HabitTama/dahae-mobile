@@ -1,10 +1,18 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'package:dahae_mobile/models/day_of_week.dart';
+
 class EditDialog extends StatefulWidget {
   final String title;
+  final List<DayOfWeek> days;
+  final String action;
   final int value;
   final String unit;
+  final DateTime startDate;
+  final DateTime endDate;
 
   // final String title, descriptions, text;
   // final Image img;
@@ -12,8 +20,12 @@ class EditDialog extends StatefulWidget {
   const EditDialog({
     super.key,
     required this.title,
-    required this.unit,
+    required this.days,
+    required this.action,
     required this.value,
+    required this.unit,
+    required this.startDate,
+    required this.endDate,
   });
 
   @override
@@ -30,12 +42,13 @@ class _EditDialogState extends State<EditDialog> {
         borderRadius: BorderRadius.all(Radius.circular(10)),
       ),
       elevation: 0,
-      backgroundColor: Colors.transparent,
+      backgroundColor: Colors.white,
+      insetPadding: const EdgeInsets.all(15.0),
       child: contentBox(context),
     );
   }
 
-  textBox(context, width, right) {
+  textBox(context, width, right, hintText) {
     return Container(
       margin: EdgeInsets.fromLTRB(0, 5, right, 5),
       height: 25.0,
@@ -43,8 +56,9 @@ class _EditDialogState extends State<EditDialog> {
       alignment: Alignment.centerLeft,
       child: TextField(
         decoration: InputDecoration(
+          hintText: hintText,
           filled: true,
-          fillColor: Theme.of(context).primaryColor.withOpacity(0.7),
+          fillColor: Theme.of(context).backgroundColor,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(5),
             borderSide: BorderSide.none,
@@ -56,11 +70,13 @@ class _EditDialogState extends State<EditDialog> {
 
   contentBox(context) {
     return Container(
-      width: 200,
+      // width: max(MediaQuery.of(context).size.width, 350),
+      //height: MediaQuery.of(context).size.height - 200,
       padding: const EdgeInsets.all(8.0),
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.all(Radius.circular(10.0)),
-        color: Theme.of(context).backgroundColor,
+        border: Border.all(width: 2, color: Theme.of(context).highlightColor),
+        color: Theme.of(context).backgroundColor.withOpacity(0.5),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -97,11 +113,11 @@ class _EditDialogState extends State<EditDialog> {
                 "해빗 상세정보 *",
                 style: Theme.of(context).textTheme.bodyText2,
               ),
-              textBox(context, 170.0, 0.0),
+              //textBox(context, 170.0, 0.0,),
               Row(
                 children: [
-                  textBox(context, 60.0, 10.0),
-                  textBox(context, 60.0, 0.0),
+                  textBox(context, 60.0, 10.0, "temp"),
+                  textBox(context, 60.0, 0.0, "temp"),
                 ],
               ),
               Divider(
@@ -116,17 +132,17 @@ class _EditDialogState extends State<EditDialog> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  textBox(context, 100.0, 0.0),
+                  textBox(context, 100.0, 0.0, "temp"),
                   Text(
                     "~",
                     style: Theme.of(context).textTheme.bodyText2,
                   ),
-                  textBox(context, 100.0, 0.0),
+                  textBox(context, 100.0, 0.0, "temp"),
                 ],
               ),
               Row(
                 children: [
-                  textBox(context, 140.0, 10.0),
+                  textBox(context, 140.0, 10.0, "temp"),
                   CupertinoSwitch(
                     value: timeSet,
                     onChanged: (value) => setState(() => timeSet = !timeSet),
