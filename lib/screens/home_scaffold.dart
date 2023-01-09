@@ -64,11 +64,6 @@ class _NavBarState extends State<NavBar> {
               GoRouter.of(context).go('/habit');
             }),
             icon: calendar_icon,
-            /*icon:
-                Image.asset("assets/icons/calendar.png", width: 30, height: 30),
-            isSelected: (_menu == 0) ? true : false,
-            selectedIcon: Image.asset("assets/icons/calendar_act.png",
-                width: 30, height: 30),*/
             enableFeedback: false,
           ),
           IconButton(
