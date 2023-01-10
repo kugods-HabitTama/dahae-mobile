@@ -31,25 +31,27 @@ class SettingBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 50,
-        margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-        decoration: BoxDecoration(
-          color: Theme.of(context).primaryColor,
-          borderRadius: const BorderRadius.all(Radius.circular(6)),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SizedBox(
-                width: 50, child: Image.asset(iconAddr, width: 25, height: 25)),
-            Expanded(child: Text(text, style: const TextStyle(fontSize: 14))),
-            SizedBox(
-                width: 70,
-                child: Icon(Icons.arrow_forward_ios,
-                    color: Theme.of(context).highlightColor))
-          ],
-        ));
+      height: 50,
+      margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+      decoration: BoxDecoration(
+        color: Theme.of(context).primaryColor,
+        borderRadius: const BorderRadius.all(Radius.circular(6)),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SizedBox(
+              width: 50, child: Image.asset(iconAddr, width: 25, height: 25)),
+          Expanded(child: Text(text, style: const TextStyle(fontSize: 14))),
+          SizedBox(
+            width: 70,
+            child: Icon(Icons.arrow_forward_ios,
+                color: Theme.of(context).highlightColor),
+          )
+        ],
+      ),
+    );
   }
 }
 
