@@ -156,7 +156,7 @@ class _CalenderHeaderState extends State<CalenderHeader> {
             (index) => dayButton(
               date: widget.selectedDate
                   .add(Duration(days: index - widget.selectedDate.weekday + 1)),
-              dayButtomMode: DayButtomMode.dateOfWeek,
+              dayButtomMode: DayButtonMode.dateOfWeek,
               context: context,
               isEmpty: false,
             ),
@@ -211,7 +211,7 @@ class _CalenderHeaderState extends State<CalenderHeader> {
                 return dayButton(
                   date: widget.selectedDate // 일월화수목금토 순서
                     .add(Duration(days: index - firstDay.weekday % 7 - widget.selectedDate.day + 1)),
-                  dayButtomMode: DayButtomMode.dayOfMonth,
+                  dayButtomMode: DayButtonMode.dayOfMonth,
                   context: context,
                   isEmpty: index >= firstDay.weekday % 7 ? false: true,
                 );
@@ -225,7 +225,7 @@ class _CalenderHeaderState extends State<CalenderHeader> {
 
   Widget dayButton({
     required DateTime date,
-    required DayButtomMode dayButtomMode,
+    required DayButtonMode dayButtomMode,
     required BuildContext context,
     required bool isEmpty,
   }) {
@@ -253,7 +253,7 @@ class _CalenderHeaderState extends State<CalenderHeader> {
         onTap: () => GoRouter.of(context)
             .go('/habit/${DateFormat('yyyy/MM/dd').format(date)}'),
         child: Padding(
-          padding: dayButtomMode == DayButtomMode.dateOfWeek
+          padding: dayButtomMode == DayButtonMode.dateOfWeek
               ? const EdgeInsets.all(0.0)
               : const EdgeInsets.all(5.5),
           child: Container(
@@ -261,10 +261,10 @@ class _CalenderHeaderState extends State<CalenderHeader> {
               shape: BoxShape.circle,
               color: backgroundColor,
             ),
-            padding: dayButtomMode == DayButtomMode.dateOfWeek
+            padding: dayButtomMode == DayButtonMode.dateOfWeek
               ? const EdgeInsets.all(14.5)
               : const EdgeInsets.all(10.0),
-            child: dayButtomMode == DayButtomMode.dateOfWeek
+            child: dayButtomMode == DayButtonMode.dateOfWeek
               ? Text(DayOfWeek.koreanFormat(date.weekday - 1),
                 style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w300,),
                 textAlign: TextAlign.center,
@@ -280,4 +280,4 @@ class _CalenderHeaderState extends State<CalenderHeader> {
   }
 }
 
-enum DayButtomMode { dateOfWeek, dayOfMonth }
+enum DayButtonMode { dateOfWeek, dayOfMonth }
