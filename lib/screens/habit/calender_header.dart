@@ -259,18 +259,26 @@ class _CalenderHeaderState extends State<CalenderHeader> {
             shape: BoxShape.circle,
             color: backgroundColor,
           ),
-          padding: dayButtomMode == DayButtonMode.dateOfWeek
-            ? const EdgeInsets.all(14.5)
-            : const EdgeInsets.all(9.5),
-          child: dayButtomMode == DayButtonMode.dateOfWeek
-            ? Text(DayOfWeek.koreanFormat(date.weekday - 1),
-              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w300,),
-              textAlign: TextAlign.center,
-            )
-            : Text('${date.day}',
-              style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w300,),
-              textAlign: TextAlign.center,
-            ),
+          height: dayButtomMode == DayButtonMode.dateOfWeek? 39 : 35,
+          width: dayButtomMode == DayButtonMode.dateOfWeek? 39 : 35,
+          child: Align(
+            alignment: Alignment.center,
+            child: dayButtomMode == DayButtonMode.dateOfWeek
+              ? Text(DayOfWeek.koreanFormat(date.weekday - 1),
+                style: isSelected
+                  ? const TextStyle(fontSize: 18, fontWeight: FontWeight.w600,)
+                  : const TextStyle(fontSize: 16, fontWeight: FontWeight.w300,
+                    color: Color.fromARGB(255, 67, 40, 118)
+                  )
+              )
+              : Text('${date.day}',
+                style: isSelected
+                  ? const TextStyle(fontSize: 15, fontWeight: FontWeight.w500,)
+                  : const TextStyle(fontSize: 15, fontWeight: FontWeight.w300,
+                    color: Color.fromARGB(255, 67, 40, 118)
+                  )
+              ),
+          )
         ),
       );
     }
