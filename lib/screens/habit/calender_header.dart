@@ -190,7 +190,7 @@ class _CalenderHeaderState extends State<CalenderHeader> {
         ),
         const SizedBox(height: 42,),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 13), // 정렬 먼가 이상함 ..
+          padding: const EdgeInsets.fromLTRB(13, 0, 13, 13),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: List.generate(
@@ -205,6 +205,8 @@ class _CalenderHeaderState extends State<CalenderHeader> {
             //shrinkWrap: true,
             padding: EdgeInsets.zero,
             crossAxisCount: 7,  // 열 개수
+            mainAxisSpacing: 11,
+            crossAxisSpacing: 13,
             children: List<Widget>.generate(
               monthDays[widget.selectedDate.month - 1] + firstDay.weekday % 7, 
               (index) {
@@ -252,28 +254,23 @@ class _CalenderHeaderState extends State<CalenderHeader> {
       return GestureDetector(
         onTap: () => GoRouter.of(context)
             .go('/habit/${DateFormat('yyyy/MM/dd').format(date)}'),
-        child: Padding(
-          padding: dayButtomMode == DayButtonMode.dateOfWeek
-              ? const EdgeInsets.all(0.0)
-              : const EdgeInsets.all(5.5),
-          child: Container(
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: backgroundColor,
-            ),
-            padding: dayButtomMode == DayButtonMode.dateOfWeek
-              ? const EdgeInsets.all(14.5)
-              : const EdgeInsets.all(10.0),
-            child: dayButtomMode == DayButtonMode.dateOfWeek
-              ? Text(DayOfWeek.koreanFormat(date.weekday - 1),
-                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w300,),
-                textAlign: TextAlign.center,
-              )
-              : Text('${date.day}',
-                style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w300,),
-                textAlign: TextAlign.center,
-              ),
+        child: Container(
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: backgroundColor,
           ),
+          padding: dayButtomMode == DayButtonMode.dateOfWeek
+            ? const EdgeInsets.all(14.5)
+            : const EdgeInsets.all(9.5),
+          child: dayButtomMode == DayButtonMode.dateOfWeek
+            ? Text(DayOfWeek.koreanFormat(date.weekday - 1),
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w300,),
+              textAlign: TextAlign.center,
+            )
+            : Text('${date.day}',
+              style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w300,),
+              textAlign: TextAlign.center,
+            ),
         ),
       );
     }
