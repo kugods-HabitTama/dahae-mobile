@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
-import 'profile_box.dart';
+import 'profile_component.dart';
 
 class SettingScroll extends StatefulWidget {
   const SettingScroll({super.key});
