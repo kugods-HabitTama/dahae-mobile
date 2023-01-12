@@ -1,18 +1,16 @@
-import 'package:dahae_mobile/app.dart';
-import 'package:dahae_mobile/screens/habit/habit_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:go_router/go_router.dart';
 
 import 'package:dahae_mobile/screens/login/login_component.dart';
-import 'package:dahae_mobile/screens/route_animation.dart';
 
-class SignUpScreen extends StatefulWidget {
+class SignInScreen extends StatefulWidget {
   @override
-  State<SignUpScreen> createState() => _SignUpScreenState();
+  State<SignInScreen> createState() => _SignInScreenState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen> {
-  bool _isDup = false;
+class _SignInScreenState extends State<SignInScreen> {
+  bool _isWrong = false;
   final formKey = GlobalKey<FormState>();
   //final emailController = TextEditingController();
   String email = '';
@@ -20,8 +18,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     //WARNING MESSAGE
-    Center duplicateEmail = const Center(
-      child: Text('중복된 이메일입니다.',
+    Center wrongAccountMsg = const Center(
+      child: Text('잘 못 입력하셨습니다.',
           style: TextStyle(
               color: Color(0xFFFA0000),
               fontSize: 12,
@@ -46,7 +44,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return Form(
       key: formKey,
       child: Scaffold(
-          resizeToAvoidBottomInset: true,
+          //resizeToAvoidBottomInset: false,
           backgroundColor: Colors.white,
           appBar: signUpBar,
           extendBodyBehindAppBar: true,
@@ -55,14 +53,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const SizedBox(height: 70),
+                const SizedBox(height: 100),
                 const Image(
                     image: AssetImage('assets/images/logo_3d.png'),
                     height: 130),
                 const SizedBox(height: 25),
-                SignUpText(text: _isDup ? '이메일을 다시' : '이메일을'),
                 SizedBox(
-                    height: 30, child: _isDup ? duplicateEmail : Container()),
+                    height: 30,
+                    child: _isWrong ? wrongAccountMsg : Container()),
                 SignUpInputTextBox(
                   label: '이메일',
                   onSaved: (val) {},
@@ -76,26 +74,45 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         .hasMatch(val)) {
                       return '잘못된 이메일 형식입니다.';
                     }
-
-                    //중복확인하는 method 넣기
-
                     return null;
                   },
                 ),
+                const SizedBox(height: 10),
+                SignUpInputTextBox(
+                  label: '비밀번호',
+                  password: true,
+                  onSaved: (val) {},
+                  validator: (val) {
+                    if (val.length < 1) {
+                      return '비밀번호를 입력하세요.';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text(
+                      '비밀번호가 생각나지 않아요',
+                      style: TextStyle(fontSize: 9),
+                    ),
+                    SizedBox(height: 30, width: 30),
+                  ],
+                ),
+                const SizedBox(height: 50)
               ],
             ),
           ),
+          // sign in button
           bottomSheet: SignUpBottomButton(
-            text: '인증하기',
+            text: '로그인',
             onPressed: () async {
               if (formKey.currentState?.validate() == true) {
                 formKey.currentState?.save();
-                PageRouteWithAnimation pageRouteWithAnimation =
-                    PageRouteWithAnimation(DahaeApp());
-                Navigator.push(
-                    context, pageRouteWithAnimation.slideRitghtToLeft());
+                GoRouter.of(context).go('/habit');
               } else {
-                _isDup = true;
+                _isWrong = true;
               }
             },
           )),
