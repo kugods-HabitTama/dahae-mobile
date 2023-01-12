@@ -64,11 +64,12 @@ class SignUpInputTextBox extends StatefulWidget {
     required this.label,
     required this.onSaved,
     required this.validator,
-    required this.onChanged,
     required this.focusNode,
+    required this.onChanged,
     this.errorText = '',
     this.password = false,
     this.isNum = false,
+    this.nopad = false,
   });
   //assert
 
@@ -79,6 +80,7 @@ class SignUpInputTextBox extends StatefulWidget {
   final bool password;
   final FocusNode focusNode;
   final bool isNum;
+  final bool nopad;
   String errorText;
 
   @override
@@ -107,7 +109,7 @@ class _SignUpInputTextBoxState extends State<SignUpInputTextBox> {
             decoration: InputDecoration(
               isDense: true,
               prefixIcon: SizedBox(
-                width: widget.password ? 120 : 90,
+                width: widget.password ? (widget.nopad ? 90 : 120) : 90,
                 child: Text(
                   widget.label,
                   style: const TextStyle(
@@ -147,6 +149,15 @@ class _SignUpInputTextBoxState extends State<SignUpInputTextBox> {
 }
 
 class CheckValidate {
+  String? validateEmpty(FocusNode focusNode, String val) {
+    if (val.isEmpty) {
+      focusNode.requestFocus();
+      return '비밀번호를 입력하세요.';
+    } else {
+      return null;
+    }
+  }
+
   String? validateEmail(FocusNode focusNode, String val) {
     if (val.isEmpty) {
       focusNode.requestFocus();
@@ -164,7 +175,7 @@ class CheckValidate {
     }
   }
 
-  //세분화 가능
+//세분화 가능
   String? validatePassword(FocusNode focusNode, String val) {
     if (val.isEmpty) {
       focusNode.requestFocus();
@@ -244,15 +255,16 @@ class _SignUpBottomButtonState extends State<SignUpBottomButton> {
         decoration: BoxDecoration(
             color: Theme.of(context).highlightColor,
             borderRadius: const BorderRadius.vertical(
-                top: Radius.circular(6), bottom: Radius.circular(6)),
+                top: Radius.circular(0),
+                bottom: Radius.circular(0)), //circular(6)
             border: Border.all(
                 width: 1,
                 color: const Color(0xFF7D7D7D),
                 style: BorderStyle.solid)),
         child: InkWell(
           highlightColor: Theme.of(context).primaryColor,
-          customBorder:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+          //customBorder:
+          //RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
           onTap: widget.onPressed,
           child: Container(
             //Padding(padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
@@ -262,7 +274,7 @@ class _SignUpBottomButtonState extends State<SignUpBottomButton> {
               style: const TextStyle(
                   color: Color(0xFFF5EFFF), //Color(0xFF646464),
                   fontWeight: FontWeight.w700,
-                  fontSize: 19),
+                  fontSize: 17),
             ),
           ),
         ),

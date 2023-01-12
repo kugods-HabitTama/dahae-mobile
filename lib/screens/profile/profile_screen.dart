@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:go_router/go_router.dart';
 
 import 'profile_header.dart';
 import 'profile_setting.dart';
@@ -13,6 +15,33 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   //profile data 정의
+
+  void _showAlert({String? title, String? message}) {
+    showCupertinoDialog(
+        context: context,
+        builder: (context) {
+          return CupertinoAlertDialog(
+            title: Text(title ?? ''),
+            content: Text(message ?? ''),
+            actions: [
+              CupertinoDialogAction(
+                  isDefaultAction: false,
+                  child: Text("확인"),
+                  onPressed: () {
+                    // 서버와 auth 초기화 하기
+                    Navigator.pop(context);
+                    GoRouter.of(context).go('/splash');
+                  }),
+              CupertinoDialogAction(
+                  isDefaultAction: true,
+                  child: Text("취소"),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  }),
+            ],
+          );
+        });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,8 +64,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
             color: Theme.of(context).backgroundColor,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: const [
-                ProfileBottomBox(text: '로그아웃', outlined: false),
+              children: [
+                GestureDetector(
+                    onTap: () {
+                      _showAlert(title: '로그아웃', message: '로그아웃2');
+                    },
+                    child: ProfileBottomBox(text: '로그아웃', outlined: false)),
                 ProfileBottomBox(text: '계정 삭제', outlined: true),
               ],
             ),

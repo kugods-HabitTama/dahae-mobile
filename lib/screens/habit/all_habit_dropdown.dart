@@ -19,8 +19,9 @@ class _AllHabitDropdownState extends State<AllHabitDropdown> {
 
   @override
   Widget build(BuildContext context) {
-    var height =
-        _open ? min(MediaQuery.of(context).size.height - 100, 570.0) : 40.0;
+    var height = _open
+        ? min(MediaQuery.of(context).size.height - 100, 430.0)
+        : 40.0; // -100, 570
 
     var width = _open ? MediaQuery.of(context).size.width - 30 : 40.0;
 
@@ -143,12 +144,13 @@ class AllHabitDropdownTile extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
+              const SizedBox(width: 20),
               Expanded(
                 child: Text(
                   habit.title,
                   style: const TextStyle(
                     fontWeight: FontWeight.w600,
-                    fontSize: 18,
+                    fontSize: 15,
                     color: Color(0xFF0F0324),
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -158,6 +160,7 @@ class AllHabitDropdownTile extends StatelessWidget {
                 Icons.edit,
                 color: Theme.of(context).highlightColor,
               ),
+              const SizedBox(width: 4),
             ],
           ),
         ),

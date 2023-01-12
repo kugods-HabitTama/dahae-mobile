@@ -58,7 +58,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
 
     SignUpBottomButton bottomButton = SignUpBottomButton(
-      text: '인증하기',
+      text: '인증번호 받기',
       onPressed: () async {
         if (formKey.currentState?.validate() == true) {
           formKey.currentState?.save();

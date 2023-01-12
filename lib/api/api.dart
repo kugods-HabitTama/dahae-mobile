@@ -5,6 +5,7 @@ import '../models/habit.dart';
 import 'api_consts.dart';
 import 'dio/dio_factory.dart';
 import 'habit_api.dart';
+import 'account_api.dart';
 
 // 사용자의 모든 해빗을 가져오는 함수
 Future<List<Habit>> getHabits() async {
@@ -21,6 +22,22 @@ Future<List<HabitRecord>> getHabitRecords(DateTime date) async {
   final habitResponse = await habitsApi.getHabitRecords(date);
   return habitResponse.habitRecords!;
 }
+
+// // email 중복 체크
+// Future<List<HabitRecord>> isEmailDuplicate(DateTime date) async {
+//   final dio = _createDio();
+//   final accountApi = AccountApi(dio);
+//   final accountResponse = await accountApi.isEmailDuplicate(date);
+//   return accountResponse; //.habitRecords!;
+// }
+
+// // 닉네임 중복 체크
+// Future<List<HabitRecord>> isNameDuplicate(DateTime date) async {
+//   final dio = _createDio();
+//   final accountApi = AccountApi(dio);
+//   final accountResponse = await accountApi.isNameDuplicate(date);
+//   return accountResponse; //.habitRecords!;
+// }
 
 Dio _createDio() {
   // 나중에 인증 기능 추가할 때 사용함.

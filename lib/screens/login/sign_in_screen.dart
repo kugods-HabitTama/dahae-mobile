@@ -14,6 +14,9 @@ class _SignInScreenState extends State<SignInScreen> {
   final formKey = GlobalKey<FormState>();
   //final emailController = TextEditingController();
   String email = '';
+  String password = '';
+  FocusNode _emailFocus = FocusNode();
+  FocusNode _passwordFocus = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +29,79 @@ class _SignInScreenState extends State<SignInScreen> {
               fontWeight: FontWeight.w500)),
     );
 
+    SingleChildScrollView screenBody = SingleChildScrollView(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SizedBox(
+              height: MediaQuery.of(context).viewInsets.bottom == 0
+                  ? MediaQuery.of(context).size.height * 0.17
+                  : MediaQuery.of(context).size.height * 0.1),
+          const Image(
+              image: AssetImage('assets/images/logo_3d.png'), height: 130),
+          const SizedBox(height: 25),
+          LoginPageText(),
+          SizedBox(height: 30, child: _isWrong ? wrongAccountMsg : Container()),
+          SignUpInputTextBox(
+            label: '이메일',
+            focusNode: _emailFocus,
+            onSaved: (val) {
+              setState(() {
+                email = val;
+              });
+            },
+            onChanged: (val) {},
+            validator: (val) => CheckValidate().validateEmail(_emailFocus, val),
+          ),
+          const SizedBox(height: 10),
+          SignUpInputTextBox(
+            label: '비밀번호',
+            password: true,
+            nopad: true,
+            focusNode: _passwordFocus,
+            onSaved: (val) {
+              setState(() {
+                password = val;
+              });
+            },
+            onChanged: (val) {},
+            validator: (val) => CheckValidate().validateEmpty(_emailFocus, val),
+          ),
+          const SizedBox(height: 10),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              GestureDetector(
+                onTap: () => GoRouter.of(context).go('/habit'),
+                child: Text(
+                  '비밀번호가 생각나지 않아요',
+                  style: TextStyle(fontSize: 9),
+                ),
+              ),
+              SizedBox(height: 30, width: 30),
+            ],
+          ),
+          const SizedBox(height: 50)
+        ],
+      ),
+    );
+
+    SignUpBottomButton bottomButton = SignUpBottomButton(
+      text: '로그인',
+      onPressed: () async {
+        if (formKey.currentState?.validate() == true) {
+          formKey.currentState?.save();
+          // DB로 보내서 맞는지 확인
+          if (true) {
+            GoRouter.of(context).go('/habit');
+          } else {
+            _isWrong = true;
+          }
+        }
+      },
+    );
+
     return Form(
       key: formKey,
       child: Scaffold(
@@ -35,84 +111,9 @@ class _SignInScreenState extends State<SignInScreen> {
               preferredSize: Size.fromHeight(kToolbarHeight),
               child: SignUpAppBar()),
           extendBodyBehindAppBar: true,
-          body: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(
-                    height: MediaQuery.of(context).viewInsets.bottom == 0
-                        ? MediaQuery.of(context).size.height * 0.17
-                        : MediaQuery.of(context).size.height * 0.1),
-                const Image(
-                    image: AssetImage('assets/images/logo_3d.png'),
-                    height: 130),
-                const SizedBox(height: 25),
-                LoginPageText(),
-                SizedBox(
-                    height: 30,
-                    child: _isWrong ? wrongAccountMsg : Container()),
-                SignUpInputTextBox(
-                  label: '이메일',
-                  focusNode: FocusNode(),
-                  onSaved: (val) {},
-                  onChanged: (val) {},
-                  validator: (val) {
-                    if (val.length < 1) {
-                      return '이메일을 입력하세요.';
-                    }
-
-                    if (!RegExp(
-                            r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
-                        .hasMatch(val)) {
-                      return '잘못된 이메일 형식입니다.';
-                    }
-                    return null;
-                  },
-                ),
-                const SizedBox(height: 10),
-                SignUpInputTextBox(
-                  label: '비밀번호',
-                  password: true,
-                  focusNode: FocusNode(),
-                  onSaved: (val) {},
-                  onChanged: (val) {},
-                  validator: (val) {
-                    if (val.length < 1) {
-                      return '비밀번호를 입력하세요.';
-                    }
-                    return null;
-                  },
-                ),
-                const SizedBox(height: 10),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Text(
-                      '비밀번호가 생각나지 않아요',
-                      style: TextStyle(fontSize: 9),
-                    ),
-                    SizedBox(height: 30, width: 30),
-                  ],
-                ),
-                const SizedBox(height: 50)
-              ],
-            ),
-          ),
+          body: screenBody,
           // sign in button
-          bottomSheet: SignUpBottomButton(
-            text: '로그인',
-            onPressed: () async {
-              if (formKey.currentState?.validate() == true) {
-                formKey.currentState?.save();
-                GoRouter.of(context).go('/habit');
-              } else {
-                // DB로 보냈지만 틀렸을 때
-                // if(~)
-                _isWrong = true;
-              }
-            },
-          )),
+          bottomSheet: bottomButton),
     );
   }
 }

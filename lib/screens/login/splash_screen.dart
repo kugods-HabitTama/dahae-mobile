@@ -16,9 +16,13 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   @override
-  void iniState() {
+  initState() {
     super.initState();
-    Timer(Duration(seconds: 2), () => GoRouter.of(context).go('/habit')
+    Timer.periodic(Duration(seconds: 2), (timer) {
+      // auth가 있으면 바로 habit 아니면 login
+      GoRouter.of(context).go('/login');
+      //GoRouter.of(context).go('/habit');
+    }
         //Navigator.push(context, MaterialPageRoute(builder: (context) => LogInScreen())),
         );
   }
