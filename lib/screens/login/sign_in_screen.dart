@@ -26,44 +26,37 @@ class _SignInScreenState extends State<SignInScreen> {
               fontWeight: FontWeight.w500)),
     );
 
-    AppBar signUpBar = AppBar(
-        elevation: 0,
-        leading: IconButton(
-            focusColor: Colors.white,
-            splashColor: Colors.white,
-            highlightColor: Colors.white,
-            disabledColor: Colors.white,
-            icon:
-                Icon(Icons.arrow_back_ios, color: Theme.of(context).hintColor),
-            onPressed: () {
-              Navigator.pop(context);
-            }),
-        backgroundColor: Colors.transparent,
-        shadowColor: Colors.white);
-
     return Form(
       key: formKey,
       child: Scaffold(
           //resizeToAvoidBottomInset: false,
           backgroundColor: Colors.white,
-          appBar: signUpBar,
+          appBar: const PreferredSize(
+              preferredSize: Size.fromHeight(kToolbarHeight),
+              child: SignUpAppBar()),
           extendBodyBehindAppBar: true,
           body: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const SizedBox(height: 100),
+                SizedBox(
+                    height: MediaQuery.of(context).viewInsets.bottom == 0
+                        ? MediaQuery.of(context).size.height * 0.17
+                        : MediaQuery.of(context).size.height * 0.1),
                 const Image(
                     image: AssetImage('assets/images/logo_3d.png'),
                     height: 130),
                 const SizedBox(height: 25),
+                LoginPageText(),
                 SizedBox(
                     height: 30,
                     child: _isWrong ? wrongAccountMsg : Container()),
                 SignUpInputTextBox(
                   label: '이메일',
+                  focusNode: FocusNode(),
                   onSaved: (val) {},
+                  onChanged: (val) {},
                   validator: (val) {
                     if (val.length < 1) {
                       return '이메일을 입력하세요.';
@@ -81,7 +74,9 @@ class _SignInScreenState extends State<SignInScreen> {
                 SignUpInputTextBox(
                   label: '비밀번호',
                   password: true,
+                  focusNode: FocusNode(),
                   onSaved: (val) {},
+                  onChanged: (val) {},
                   validator: (val) {
                     if (val.length < 1) {
                       return '비밀번호를 입력하세요.';
@@ -112,6 +107,8 @@ class _SignInScreenState extends State<SignInScreen> {
                 formKey.currentState?.save();
                 GoRouter.of(context).go('/habit');
               } else {
+                // DB로 보냈지만 틀렸을 때
+                // if(~)
                 _isWrong = true;
               }
             },
