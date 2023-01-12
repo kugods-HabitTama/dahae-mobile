@@ -45,7 +45,8 @@ class _EditDialogState extends State<EditDialog> {
 
   @override
   Widget build(BuildContext context) {
-    double dialogWidth = MediaQuery.of(context).size.width;
+    var screenHeight = MediaQuery.of(context).size.height;
+    var screenWidth = MediaQuery.of(context).size.width;
 
     return Dialog(
       shape: const RoundedRectangleBorder(
@@ -72,7 +73,7 @@ class _EditDialogState extends State<EditDialog> {
         // width: max(MediaQuery.of(context).size.width, 350),
         // height: MediaQuery.of(context).size.height * 3 / 5,
         width: 350,
-        height: 450,
+        height: 500,
         //padding: const EdgeInsets.all(12.0),
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.all(Radius.circular(10.0)),
@@ -102,6 +103,25 @@ class _EditDialogState extends State<EditDialog> {
                       color: Theme.of(context).primaryColor.withOpacity(0.7),
                     ),
                     PeriodBox(startDate: startDate, endDate: endDate),
+                    Container(
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Container(),
+                          ),
+                          OutlinedButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                              // 완료 눌렀을 때 DB에 data update 되도록 마저 구현하기
+                            },
+                            child: Text(
+                              "완료",
+                              style: Theme.of(context).textTheme.subtitle2,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ),

@@ -17,6 +17,9 @@ class _PeriodBoxState extends State<PeriodBox> {
 
   @override
   Widget build(BuildContext context) {
+    var screenHeight = MediaQuery.of(context).size.height;
+    var screenWidth = MediaQuery.of(context).size.width;
+
     return Container(
       //color: Colors.cyan,
       margin: const EdgeInsets.only(
@@ -35,7 +38,7 @@ class _PeriodBoxState extends State<PeriodBox> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               TextBox(
-                width: 130,
+                width: screenWidth / 3,
                 rightOffset: 0,
                 hintText: widget.startDate.toString(),
               ),
@@ -44,7 +47,7 @@ class _PeriodBoxState extends State<PeriodBox> {
                 style: Theme.of(context).textTheme.bodyText2,
               ),
               TextBox(
-                  width: 130.0,
+                  width: screenWidth / 3,
                   rightOffset: 0,
                   hintText: widget.endDate.toString()),
             ],
@@ -52,7 +55,7 @@ class _PeriodBoxState extends State<PeriodBox> {
           Row(
             children: [
               TextBox(
-                  width: 180,
+                  width: screenWidth / 3 + 40,
                   rightOffset: 10,
                   hintText: widget.startDate.toString()),
               CupertinoSwitch(

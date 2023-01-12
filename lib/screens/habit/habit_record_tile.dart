@@ -47,14 +47,17 @@ class _HabitRecordTileState extends State<HabitRecordTile> {
             bottomRight: Radius.circular(6),
           );
 
-    var arrowIcon = AnimatedRotation(
-      turns: _open ? -0.25 : 0.25,
-      duration: const Duration(milliseconds: 100),
-      child: Icon(Icons.arrow_forward_ios,
-          size: 26,
-          color: _onProgress
-              ? Theme.of(context).highlightColor
-              : Theme.of(context).hintColor),
+    var arrowIcon = Container(
+      padding: const EdgeInsets.all(10),
+      child: AnimatedRotation(
+        turns: _open ? -0.25 : 0.25,
+        duration: const Duration(milliseconds: 100),
+        child: Icon(Icons.arrow_forward_ios,
+            size: 26,
+            color: _onProgress
+                ? Theme.of(context).highlightColor
+                : Theme.of(context).hintColor),
+      ),
     );
 
     Widget defaultTile = Container(
@@ -101,7 +104,7 @@ class _HabitRecordTileState extends State<HabitRecordTile> {
                   child: Text(
                     widget.habitRecord.habit.title,
                     style: const TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 20),
+                        fontWeight: FontWeight.bold, fontSize: 17),
                   ),
                 ),
                 Container(
@@ -110,6 +113,7 @@ class _HabitRecordTileState extends State<HabitRecordTile> {
                     widget.habitRecord.habit.daysToString,
                     style: const TextStyle(
                       color: Colors.grey,
+                      fontSize: 13,
                     ),
                   ),
                 )
@@ -134,7 +138,7 @@ class _HabitRecordTileState extends State<HabitRecordTile> {
         borderRadius: borderRadius,
         color: Theme.of(context).backgroundColor,
       ),
-      padding: const EdgeInsets.all(15.0),
+      padding: const EdgeInsets.all(20.0),
       child: Column(
         children: [
           Row(
@@ -151,16 +155,15 @@ class _HabitRecordTileState extends State<HabitRecordTile> {
                       child: Text(
                         widget.habitRecord.habit.title,
                         style: const TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 20),
+                            fontWeight: FontWeight.bold, fontSize: 17),
                       ),
                     ),
                     Container(
                       padding: const EdgeInsets.all(5),
                       child: Text(
                         widget.habitRecord.habit.daysToString,
-                        style: const TextStyle(
-                          color: Colors.grey,
-                        ),
+                        style:
+                            const TextStyle(color: Colors.grey, fontSize: 13),
                       ),
                     )
                   ],

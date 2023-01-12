@@ -14,6 +14,11 @@ class _DayButtonsState extends State<DayButtons> {
 
   @override
   Widget build(BuildContext context) {
+    var screenHeight = MediaQuery.of(context).size.height;
+    var screenWidth = MediaQuery.of(context).size.width;
+
+    var relativePadding = screenWidth / 120;
+
     return Container(
       // margin: const EdgeInsets.only(
       //   top: 5,
@@ -29,7 +34,7 @@ class _DayButtonsState extends State<DayButtons> {
           });
         },
         constraints: const BoxConstraints(
-          maxWidth: 320,
+          maxWidth: 360,
         ),
         isSelected: widget.isSelected,
         selectedBorderColor: Colors.transparent,
@@ -39,7 +44,7 @@ class _DayButtonsState extends State<DayButtons> {
         children: List<Widget>.generate(
           7,
           (index) => Padding(
-            padding: const EdgeInsets.all(6.0),
+            padding: EdgeInsets.all(relativePadding),
             child: Container(
               decoration: BoxDecoration(
                 color: widget.isSelected[index]
@@ -47,8 +52,8 @@ class _DayButtonsState extends State<DayButtons> {
                     : Theme.of(context).backgroundColor,
                 borderRadius: BorderRadius.circular(18),
               ),
-              width: 32,
-              height: 32,
+              width: screenWidth / 12,
+              height: screenWidth / 12,
               alignment: Alignment.center,
               child: Text(
                 weekdays[index],
