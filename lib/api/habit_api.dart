@@ -26,4 +26,17 @@ class HabitApi {
     final json = response.data!;
     return HabitResponse.fromJson(json);
   }
+
+  // 해빗 진행정도를 입력하는 메커니즘을 정의한다.
+  //
+
+  // 새로운 해빗을 입력하는 메커니즘을 정의한다.
+  //
+
+  // 해빗을 수정하는 메커니즘을 정의한다.
+  //
+
+  // 해빗을 삭제하는 메커니즘을 정의한다.
+  //
+
 }

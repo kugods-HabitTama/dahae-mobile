@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'profile_header_component.dart';
+
 class ProfileHeader extends StatefulWidget {
   const ProfileHeader({super.key});
 

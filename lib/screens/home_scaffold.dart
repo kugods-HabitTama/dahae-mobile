@@ -53,7 +53,7 @@ class _NavBarState extends State<NavBar> {
             blurRadius: 5,
           )
         ],
-        color: Theme.of(context).backgroundColor,
+        color: Colors.white,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
