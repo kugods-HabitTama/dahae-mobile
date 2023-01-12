@@ -40,7 +40,7 @@ class _ProfileHeaderState extends State<ProfileHeader> {
           padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
         ),
         const SizedBox(height: 40),
-        const Image(image: AssetImage('assets/images/logo.png')),
+        const Image(image: AssetImage('assets/images/logo.png'), height: 40),
         const SizedBox(height: 10),
         Row(
           children: [

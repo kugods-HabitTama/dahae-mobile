@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'app.dart';
+import 'package:dahae_mobile/X_app_start.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

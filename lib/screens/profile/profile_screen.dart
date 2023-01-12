@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'profile_header.dart';
 import 'profile_setting.dart';
-import 'profile_box.dart';
+import 'profile_component.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
