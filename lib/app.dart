@@ -31,6 +31,12 @@ class DahaeApp extends StatelessWidget {
         redirect: (_, __) => '/habit',
       ),
       GoRoute(
+        path: '/splash',
+        builder: (context, state) {
+          return const SplashScreen();
+        },
+      ),
+      GoRoute(
         path: '/login',
         builder: (context, state) {
           return LogInScreen();

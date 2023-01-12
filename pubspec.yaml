@@ -44,6 +44,7 @@ dependencies:
   json_annotation: ^4.7.0
   dio: ^4.0.6
   url_launcher: ^6.0.18
+  flutter_native_splash: ^2.2.16
   get:
   logger:
   permission_handler:
