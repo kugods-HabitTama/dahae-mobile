@@ -58,6 +58,16 @@ class _CalenderHeaderState extends State<CalenderHeader> {
               _week = !_week;
             });
           }),
+          onVerticalDragUpdate: (DragUpdateDetails details) {
+            setState(() {
+              if (_week & (details.delta.dy > 0)) {
+                _week = !_week;
+              }
+              else if (!_week & (details.delta.dy < 0)) {
+                _week = !_week;
+              }
+            });
+          },
           behavior: HitTestBehavior.translucent,
           child: Stack(
             alignment: Alignment.center,
