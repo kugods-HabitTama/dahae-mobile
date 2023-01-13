@@ -215,6 +215,7 @@ class _CalenderHeaderState extends State<CalenderHeader> {
               crossAxisCount: 7, // 열 개수
               mainAxisSpacing: 11,
               crossAxisSpacing: 13,
+              physics: const NeverScrollableScrollPhysics(),
               children: List<Widget>.generate(
                   monthDays[widget.selectedDate.month - 1] +
                       firstDay.weekday % 7, (index) {
