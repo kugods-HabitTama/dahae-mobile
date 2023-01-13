@@ -141,7 +141,7 @@ class _CalenderHeaderState extends State<CalenderHeader> {
         Text(
           DateFormat('yyyy 년 MM 월 dd 일').format(widget.selectedDate),
           textAlign: TextAlign.left,
-          style: const TextStyle(fontSize: 12),
+          style: const TextStyle(fontSize: 12, color:Color.fromARGB(255, 67, 40, 118)),
         ),
         const SizedBox(height: 13), // 간격 띄우기
         Row(
