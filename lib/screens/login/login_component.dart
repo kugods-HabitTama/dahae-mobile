@@ -34,9 +34,11 @@ class SignUpText extends StatelessWidget {
   const SignUpText({
     super.key,
     required this.text,
+    this.auth = false,
   });
 
   final String text;
+  final bool auth;
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +49,7 @@ class SignUpText extends StatelessWidget {
         const SizedBox(height: 10),
         Text.rich(
           TextSpan(children: [
-            const TextSpan(text: '사용하실 '),
+            TextSpan(text: auth ? '' : '사용하실 '),
             TextSpan(text: text),
             const TextSpan(text: ' 입력해주세요')
           ]),
@@ -70,6 +72,7 @@ class SignUpInputTextBox extends StatefulWidget {
     this.password = false,
     this.isNum = false,
     this.nopad = false,
+    this.reSend = false,
   });
   //assert
 
@@ -81,6 +84,7 @@ class SignUpInputTextBox extends StatefulWidget {
   final FocusNode focusNode;
   final bool isNum;
   final bool nopad;
+  final bool reSend;
   String errorText;
 
   @override
@@ -118,6 +122,24 @@ class _SignUpInputTextBoxState extends State<SignUpInputTextBox> {
                       fontSize: 18),
                 ),
               ),
+              // suffixIcon: widget.reSend
+              //     ? Container(
+              //         width: 50,
+              //         height: 20,
+              //         decoration: BoxDecoration(
+              //             border: Border.all(
+              //                 color: Theme.of(context).highlightColor,
+              //                 style: BorderStyle.solid,
+              //                 width: 1),
+              //             borderRadius: BorderRadius.circular(11)),
+              //         child: Text(
+              //           '재발송',
+              //           style: TextStyle(
+              //               color: Color(0xFF925FF),
+              //               fontWeight: FontWeight.w400,
+              //               fontSize: 12),
+              //         ))
+              //     : Container(),
               prefixIconConstraints:
                   BoxConstraints(minWidth: 100, minHeight: 0),
               border: UnderlineInputBorder(

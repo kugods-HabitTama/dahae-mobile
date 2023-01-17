@@ -3,6 +3,8 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../models/habit.dart';
 import '../../models/habit_record.dart';
+import '../../models/auth.dart';
+import '../../models/user.dart';
 
 part 'habit_response.freezed.dart';
 part 'habit_response.g.dart';
@@ -12,8 +14,14 @@ part 'habit_response.g.dart';
 @freezed
 class HabitResponse with _$HabitResponse {
   const factory HabitResponse({
+    // habit
     List<HabitRecord>? habitRecords, // get /habit/record
     List<Habit>? habits, // get /habit
+    // // auth
+    // Auth? userAuth,
+    // String? emailAuthCode,
+    // // account
+    // User? userProfile,
   }) = _HabitResponse;
 
   factory HabitResponse.fromJson(Map<String, dynamic> json) =>

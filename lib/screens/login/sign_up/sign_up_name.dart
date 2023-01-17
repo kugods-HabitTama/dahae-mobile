@@ -1,9 +1,12 @@
+import 'dart:convert';
+
 import 'package:dahae_mobile/app.dart';
 import 'package:dahae_mobile/screens/habit/habit_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../api/api.dart';
 import 'package:dahae_mobile/screens/login/login_component.dart';
 import 'package:dahae_mobile/screens/route_animation.dart';
 
@@ -27,6 +30,8 @@ class _SignUpNameScreenState extends State<SignUpNameScreen> {
   //final emailController = TextEditingController();
   FocusNode _nameFocus = FocusNode();
   String name = '';
+  String os = '';
+  var json;
 
   @override
   Widget build(BuildContext context) {
@@ -71,11 +76,30 @@ class _SignUpNameScreenState extends State<SignUpNameScreen> {
         if (formKey.currentState?.validate() == true) {
           formKey.currentState?.save();
           // 서버에 중복 확인 보냄
-          if (false) {
-            // server에 put 함
-            GoRouter.of(context).go('/habit');
+          if (await isNameDuplicate(name)) {
+            setState(() {
+              _isDup = true;
+            });
           } else {
-            _isDup = true;
+            _isDup = false;
+            os = Theme.of(context).platform == TargetPlatform.android
+                ? 'ANDROID'
+                : 'IOS';
+            // json = {
+            //   "email": widget.email,
+            //   "password": widget.password,
+            //   "name": name,
+            //   "os": os
+            // };
+            // server에 put 함
+            if (await userRegister(widget.email, widget.password, name, os) ==
+                200) {
+              print('성공');
+              //GoRouter.of(context).go('/habit');
+            } else {
+              //로딩중
+              //print(json);
+            }
           }
         }
       },

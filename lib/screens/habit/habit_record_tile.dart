@@ -33,6 +33,9 @@ class _HabitRecordTileState extends State<HabitRecordTile> {
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController _progressController =
+        TextEditingController(text: "${widget.habitRecord.progress}");
+
     var borderRadius = _open
         ? const BorderRadius.only(
             topLeft: Radius.circular(50),
@@ -189,6 +192,8 @@ class _HabitRecordTileState extends State<HabitRecordTile> {
                   height: 25.0,
                   width: 100.0,
                   child: TextField(
+                    style: Theme.of(context).textTheme.bodyText2,
+                    controller: _progressController,
                     decoration: InputDecoration(
                       filled: true,
                       fillColor: Theme.of(context).primaryColor,

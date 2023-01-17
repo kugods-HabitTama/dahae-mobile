@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
+import '../../models/user.dart';
 import 'profile_header_component.dart';
 
 class ProfileHeader extends StatefulWidget {
-  const ProfileHeader({super.key});
+  final User userProfile;
+  const ProfileHeader({super.key, required this.userProfile});
 
   @override
   State<ProfileHeader> createState() => _ProfileHeaderState();
@@ -76,10 +78,10 @@ class _ProfileHeaderState extends State<ProfileHeader> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const SizedBox(
+                    SizedBox(
                         width: 40,
                         child: Text(
-                          '이름은',
+                          widget.userProfile.name, //'이름은',
                           style: TextStyle(
                               fontSize: 13, fontWeight: FontWeight.w500),
                         )),

@@ -3,7 +3,9 @@ import 'package:dahae_mobile/screens/habit/habit_screen.dart';
 import 'package:dahae_mobile/screens/login/sign_up/sign_up_certification.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'dart:io' show Platform;
 
+import '../../../api/api.dart';
 import 'package:dahae_mobile/screens/login/login_component.dart';
 import 'package:dahae_mobile/screens/route_animation.dart';
 
@@ -17,6 +19,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final formKey = GlobalKey<FormState>();
   //final emailController = TextEditingController();
   String email = '';
+  String authCode = '';
   FocusNode _emailFocus = new FocusNode();
   FocusNode _passwordFocus = new FocusNode();
 
@@ -63,13 +66,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
         if (formKey.currentState?.validate() == true) {
           formKey.currentState?.save();
           //중복확인하는 method 넣기
-          if (true) {
+          if (await isEmailDuplicate(email)) {
+            setState(() {
+              _isDup = true;
+            });
+          } else {
+            _isDup = false;
+            authCode = await getEmailAuthCode(email);
             PageRouteWithAnimation pageRouteWithAnimation =
-                PageRouteWithAnimation(SignUpCertScreen(email: email));
+                PageRouteWithAnimation(
+                    SignUpCertScreen(email: email, authCode: authCode));
             Navigator.push(context, pageRouteWithAnimation.slideRitghtToLeft());
           }
-        } else {
-          _isDup = true;
         }
       },
     );
