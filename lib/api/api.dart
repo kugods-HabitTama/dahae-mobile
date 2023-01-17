@@ -1,11 +1,15 @@
 import 'package:dahae_mobile/models/habit_record.dart';
+import 'package:dahae_mobile/models/user.dart';
 import 'package:dio/dio.dart';
 
 import '../models/habit.dart';
+import '../models/auth.dart';
+import '../models/user.dart';
 import 'api_consts.dart';
 import 'dio/dio_factory.dart';
 import 'habit_api.dart';
 import 'account_api.dart';
+import 'auth_api.dart';
 
 // 사용자의 모든 해빗을 가져오는 함수
 Future<List<Habit>> getHabits() async {
@@ -23,21 +27,49 @@ Future<List<HabitRecord>> getHabitRecords(DateTime date) async {
   return habitResponse.habitRecords!;
 }
 
-// // email 중복 체크
-// Future<List<HabitRecord>> isEmailDuplicate(DateTime date) async {
-//   final dio = _createDio();
-//   final accountApi = AccountApi(dio);
-//   final accountResponse = await accountApi.isEmailDuplicate(date);
-//   return accountResponse; //.habitRecords!;
-// }
+// 사용자의 프로필 정보를 가져온다.
+Future<User> getUserProfile() async {
+  final dio = _createDio();
+  final accountApi = AccountApi(dio);
+  final accountResponse = await accountApi.getProfile();
+  return accountResponse.userProfile!;
+}
 
-// // 닉네임 중복 체크
-// Future<List<HabitRecord>> isNameDuplicate(DateTime date) async {
-//   final dio = _createDio();
-//   final accountApi = AccountApi(dio);
-//   final accountResponse = await accountApi.isNameDuplicate(date);
-//   return accountResponse; //.habitRecords!;
-// }
+// 회원가입 정보를 서버로 보낸다
+Future<int> userRegister(
+    String email, String password, String name, String os) async {
+  final dio = _createDio();
+  final authApi = AuthApi(dio);
+  final accountResponse = await authApi.register(email, password, name, os);
+  return accountResponse;
+}
+
+// email 중복 체크
+// true면 중복, false면 unique
+Future<bool> isEmailDuplicate(String email) async {
+  final dio = _createDio();
+  final authApi = AuthApi(dio);
+  final authResponse = await authApi.isEmailDuplicate(email);
+  return authResponse;
+}
+
+// 닉네임 중복 체크
+// true면 중복, false면 unique
+Future<bool> isNameDuplicate(String name) async {
+  final dio = _createDio();
+  final authApi = AuthApi(dio);
+  final authResponse = await authApi.isNameDuplicate(name);
+  return authResponse;
+}
+
+// 이메일 인증 코드
+// 6자리 string 숫자로 반환
+Future<String> getEmailAuthCode(String email) async {
+  final dio = _createDio();
+  final authApi = AuthApi(dio);
+  final authResponse = await authApi.getEmailAuthCode(email);
+  return authResponse;
+}
 
 Dio _createDio() {
   // 나중에 인증 기능 추가할 때 사용함.

@@ -28,7 +28,15 @@ class HabitApi {
   }
 
   // 해빗 진행정도를 입력하는 메커니즘을 정의한다.
-  //
+  // HabitResponse 중 progress 칸에 값이 들어간다.
+  Future<HabitResponse> changeHabitProgress(DateTime dateTime) async {
+    final response = await _dio.get<Map<String, dynamic>>(
+      '/habit/record',
+      queryParameters: {'date': DateFormat('yyyy-MM-dd').format(dateTime)},
+    );
+    final json = response.data!;
+    return HabitResponse.fromJson(json);
+  }
 
   // 새로운 해빗을 입력하는 메커니즘을 정의한다.
   //

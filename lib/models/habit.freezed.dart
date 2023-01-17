@@ -20,7 +20,9 @@ Habit _$HabitFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Habit {
-  int? get id => throw _privateConstructorUsedError;
+// id는 처음에 생성할 때는 없으니까 nullable로 처리
+  int? get id =>
+      throw _privateConstructorUsedError; // 나머지 값들은 백엔드에서 넘겨주는 그대로 작성
   String get title => throw _privateConstructorUsedError;
   String get action => throw _privateConstructorUsedError;
   int get value => throw _privateConstructorUsedError;
@@ -216,8 +218,10 @@ class _$_Habit extends _Habit with DiagnosticableTreeMixin {
   factory _$_Habit.fromJson(Map<String, dynamic> json) =>
       _$$_HabitFromJson(json);
 
+// id는 처음에 생성할 때는 없으니까 nullable로 처리
   @override
   final int? id;
+// 나머지 값들은 백엔드에서 넘겨주는 그대로 작성
   @override
   final String title;
   @override
@@ -315,9 +319,9 @@ abstract class _Habit extends Habit {
 
   factory _Habit.fromJson(Map<String, dynamic> json) = _$_Habit.fromJson;
 
-  @override
+  @override // id는 처음에 생성할 때는 없으니까 nullable로 처리
   int? get id;
-  @override
+  @override // 나머지 값들은 백엔드에서 넘겨주는 그대로 작성
   String get title;
   @override
   String get action;

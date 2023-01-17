@@ -121,7 +121,8 @@ class __$$_HabitRecordCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_HabitRecord extends _HabitRecord with DiagnosticableTreeMixin {
-  const _$_HabitRecord({required this.habit, this.progress = 0}) : super._();
+  const _$_HabitRecord({required this.habit, required this.progress})
+      : super._();
 
   factory _$_HabitRecord.fromJson(Map<String, dynamic> json) =>
       _$$_HabitRecordFromJson(json);
@@ -129,7 +130,6 @@ class _$_HabitRecord extends _HabitRecord with DiagnosticableTreeMixin {
   @override
   final Habit habit;
   @override
-  @JsonKey()
   final int progress;
 
   @override
@@ -175,8 +175,9 @@ class _$_HabitRecord extends _HabitRecord with DiagnosticableTreeMixin {
 }
 
 abstract class _HabitRecord extends HabitRecord {
-  const factory _HabitRecord({required final Habit habit, final int progress}) =
-      _$_HabitRecord;
+  const factory _HabitRecord(
+      {required final Habit habit,
+      required final int progress}) = _$_HabitRecord;
   const _HabitRecord._() : super._();
 
   factory _HabitRecord.fromJson(Map<String, dynamic> json) =
