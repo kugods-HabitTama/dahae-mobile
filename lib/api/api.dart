@@ -82,7 +82,7 @@ Dio _createDio() {
   // );
   final dioFactory = DioFactory(
     ApiConsts.baseUrl,
-    // apiAuthInterceptor,
+    //apiAuthInterceptor,
   );
   return dioFactory.create();
 }

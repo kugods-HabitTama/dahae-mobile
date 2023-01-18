@@ -9,18 +9,17 @@ class AuthApi {
 
   final Dio _dio;
   // 로그인 메커니즘을 정의한다.
-  //
-  Future<Map<String, dynamic>> login() async {
+  // X
+  Future<Map<String, dynamic>> login(String email, String password) async {
     final response = await _dio.post<Map<String, dynamic>>(
       '/auth/login',
-      data: {'email': String},
+      data: {'email': email, 'password': password},
     );
     final json = response.data!;
     return json;
   }
 
   // 회원가입 메커니즘을 정의한다.
-  //
   Future<int> register(
       String email, String password, String name, String os) async {
     final response = await _dio.post<Map<String, dynamic>>(
@@ -32,7 +31,6 @@ class AuthApi {
   }
 
   // 이메일 중복검사하는 메커니즘을 정의한다.
-  //
   Future<bool> isEmailDuplicate(String email) async {
     final response = await _dio.get<String>(
       '/auth/email/duplicate',
@@ -43,7 +41,6 @@ class AuthApi {
   }
 
   // 닉네임 중복검사하는 메커니즘을 정의한다.
-  //
   Future<bool> isNameDuplicate(String name) async {
     final response = await _dio.get<String>(
       '/auth/name/duplicate',
@@ -54,7 +51,6 @@ class AuthApi {
   }
 
   // 인증번호 메일을 보내는 메커니즘을 정의한다.
-  //
   Future<String> getEmailAuthCode(String email) async {
     final response = await _dio.post<String>(
       '/auth/authenticate-email',
@@ -65,7 +61,7 @@ class AuthApi {
   }
 
   // 비밀번호를 변경하는 메커니즘을 정의한다.
-  //
+  // X
   Future<int> changePassword(
       String currentPassword, String targetPassword) async {
     final response = await _dio.put<String>(
