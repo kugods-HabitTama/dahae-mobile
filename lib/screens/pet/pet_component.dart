@@ -24,9 +24,9 @@ class BannerCircle extends StatelessWidget {
     this.labelEnd = '',
   });
 
-  String label;
-  String main;
-  String labelEnd;
+  final String label;
+  final String main;
+  final String labelEnd;
 
   @override
   Widget build(BuildContext context) {

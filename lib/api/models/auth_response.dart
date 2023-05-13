@@ -2,7 +2,7 @@ import 'package:dahae_mobile/models/auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../models/auth.dart';
+//import '../../models/auth.dart';
 
 part 'auth_response.freezed.dart';
 part 'auth_response.g.dart';

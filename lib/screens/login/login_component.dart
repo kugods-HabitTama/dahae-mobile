@@ -85,7 +85,7 @@ class SignUpInputTextBox extends StatefulWidget {
   final bool isNum;
   final bool nopad;
   final bool reSend;
-  String errorText;
+  final String errorText;
 
   @override
   State<SignUpInputTextBox> createState() => _SignUpInputTextBoxState();

@@ -24,7 +24,7 @@ class DahaeApp extends StatelessWidget {
 
   final GoRouter _router = GoRouter(
     navigatorKey: _rootkey,
-    initialLocation: '/login',
+    initialLocation: '/habit',
     routes: [
       GoRoute(
         path: '/',

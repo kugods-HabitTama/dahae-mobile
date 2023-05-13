@@ -2,7 +2,7 @@ import 'package:dahae_mobile/api/models/auth_response.dart';
 import 'package:dio/dio.dart';
 import 'package:intl/intl.dart';
 
-import 'models/auth_response.dart';
+//import 'models/auth_response.dart';
 
 class AuthApi {
   const AuthApi(this._dio);

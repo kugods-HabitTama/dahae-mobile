@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 
 import '../models/habit.dart';
 import '../models/auth.dart';
-import '../models/user.dart';
+//import '../models/user.dart';
 import 'api_consts.dart';
 import 'dio/dio_factory.dart';
 import 'habit_api.dart';
