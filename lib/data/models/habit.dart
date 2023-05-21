@@ -2,8 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'converters.dart';
-import 'day_of_week.dart';
+import '../../common/util/converters.dart';
+import '../enums/day_of_week.dart';
 
 part 'habit.freezed.dart';
 part 'habit.g.dart';

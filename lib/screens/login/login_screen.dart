@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
-import 'package:dahae_mobile/screens/route_animation.dart';
+import 'package:dahae_mobile/common/util/route_animation.dart';
 import 'package:dahae_mobile/screens/login/login_component.dart';
 import 'package:dahae_mobile/screens/login/sign_in_screen.dart';
 import 'package:dahae_mobile/screens/login/sign_up/sign_up_email.dart';

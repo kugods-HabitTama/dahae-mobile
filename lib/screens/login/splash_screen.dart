@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'dart:async';
 import 'package:go_router/go_router.dart';
 
-import 'package:dahae_mobile/screens/route_animation.dart';
+import 'package:dahae_mobile/common/util/route_animation.dart';
 import 'package:dahae_mobile/screens/login/login_component.dart';
 import 'package:dahae_mobile/screens/login/login_screen.dart';
 

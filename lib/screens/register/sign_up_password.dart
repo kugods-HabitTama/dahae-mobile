@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'package:dahae_mobile/screens/login/login_component.dart';
-import 'package:dahae_mobile/screens/route_animation.dart';
+import 'package:dahae_mobile/common/util/route_animation.dart';
 
 class SignUpPWScreen extends StatefulWidget {
   const SignUpPWScreen({

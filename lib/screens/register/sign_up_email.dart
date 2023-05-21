@@ -7,7 +7,7 @@ import 'dart:io' show Platform;
 
 import '../../../api/api.dart';
 import 'package:dahae_mobile/screens/login/login_component.dart';
-import 'package:dahae_mobile/screens/route_animation.dart';
+import 'package:dahae_mobile/common/util/route_animation.dart';
 
 class SignUpScreen extends StatefulWidget {
   @override

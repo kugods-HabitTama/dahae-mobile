@@ -1,4 +1,4 @@
-import 'package:dahae_mobile/screens/screens_consts.dart';
+import 'package:dahae_mobile/common/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 

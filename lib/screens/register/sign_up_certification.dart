@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 
 import '../../../api/api.dart';
 import '../../login/login_component.dart';
-import '../../route_animation.dart';
+import '../../../common/util/route_animation.dart';
 import 'sign_up_password.dart';
 
 class SignUpCertScreen extends StatefulWidget {
