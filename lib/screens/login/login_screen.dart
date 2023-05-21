@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 
 import 'package:dahae_mobile/common/util/route_animation.dart';
 import 'package:dahae_mobile/screens/login/login_component.dart';
 import 'package:dahae_mobile/screens/login/sign_in_screen.dart';
-import 'package:dahae_mobile/screens/login/sign_up/sign_up_email.dart';
+import 'package:dahae_mobile/screens/register/sign_up_email.dart';
 
 class LogInScreen extends StatelessWidget {
   const LogInScreen({super.key});

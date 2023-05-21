@@ -1,10 +1,6 @@
-import 'package:dahae_mobile/app.dart';
-import 'package:dahae_mobile/screens/habit/habit_screen.dart';
+import 'package:dahae_mobile/screens/login/login_component.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 
-import '../../../api/api.dart';
-import '../../login/login_component.dart';
 import '../../../common/util/route_animation.dart';
 import 'sign_up_password.dart';
 

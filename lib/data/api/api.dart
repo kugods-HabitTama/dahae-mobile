@@ -1,12 +1,10 @@
-import 'package:dahae_mobile/models/habit_record.dart';
-import 'package:dahae_mobile/models/user.dart';
 import 'package:dio/dio.dart';
 
-import '../models/habit.dart';
-import '../models/auth.dart';
-//import '../models/user.dart';
-import '../../common/api_consts.dart';
-import '../../common/util/dio_factory.dart';
+import 'package:dahae_mobile/common/constants.dart';
+import 'package:dahae_mobile/common/util/dio_factory.dart';
+import 'package:dahae_mobile/data/models/habit.dart';
+import 'package:dahae_mobile/data/models/habit_record.dart';
+import 'package:dahae_mobile/data/models/user.dart';
 import 'habit_api.dart';
 import 'account_api.dart';
 import 'auth_api.dart';
@@ -81,7 +79,7 @@ Dio _createDio() {
   //   const ApiKeyService(),
   // );
   final dioFactory = DioFactory(
-    ApiConsts.baseUrl,
+    Constants.baseUrl,
     //apiAuthInterceptor,
   );
   return dioFactory.create();

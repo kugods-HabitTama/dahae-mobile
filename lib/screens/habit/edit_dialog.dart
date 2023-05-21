@@ -1,14 +1,9 @@
-import 'dart:math';
-
-import 'package:dahae_mobile/screens/habit/dialog/day_button.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'package:dahae_mobile/models/day_of_week.dart';
-import '../../models/habit.dart';
+import 'package:dahae_mobile/data/enums/day_of_week.dart';
+import 'package:dahae_mobile/data/models/habit.dart';
 
 // inner Boxes
-import './dialog/text_box.dart';
 import './dialog/title_box.dart';
 import './dialog/days_box.dart';
 import './dialog/detail_box.dart';

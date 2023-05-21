@@ -1,6 +1,7 @@
-import 'package:dahae_mobile/common/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import 'package:dahae_mobile/common/constants.dart';
 
 class SettingText extends StatelessWidget {
   const SettingText({super.key});
@@ -130,9 +131,9 @@ class _LinkBoxState extends State<LinkBox> {
   void initState() {
     super.initState();
     _url = ('Notice'.compareTo(url) == 0)
-        ? Uri.parse(ScreensConsts.dahaeNoticeUrl)
+        ? Uri.parse(Constants.dahaeNoticeUrl)
         : ('AppInfo'.compareTo(url) == 0)
-            ? Uri.parse(ScreensConsts.dahaeInfoUrl)
+            ? Uri.parse(Constants.dahaeInfoUrl)
             : Uri.parse(url);
   }
 

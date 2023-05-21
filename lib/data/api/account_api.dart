@@ -1,9 +1,6 @@
-import 'package:dahae_mobile/api/models/auth_response.dart';
-import 'package:dahae_mobile/api/models/habit_response.dart';
 import 'package:dio/dio.dart';
-import 'package:intl/intl.dart';
 
-import 'models/account_response.dart';
+import 'package:dahae_mobile/data/models/api_models/account_response.dart';
 
 class AccountApi {
   const AccountApi(this._dio);

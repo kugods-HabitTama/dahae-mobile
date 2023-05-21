@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../api/api.dart';
-import '../../models/habit.dart';
-import '../../models/habit_record.dart';
+import 'package:dahae_mobile/data/models/habit.dart';
+import 'package:dahae_mobile/data/models/habit_record.dart';
+import 'package:dahae_mobile/data/api/api.dart';
 import 'all_habit_dropdown.dart';
 import 'calender_header.dart';
 import 'habit_record_tile.dart';

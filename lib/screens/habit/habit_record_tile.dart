@@ -3,8 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import '../../models/habit_record.dart';
-import 'edit_dialog.dart';
+import 'package:dahae_mobile/data/models/habit_record.dart';
 
 class HabitRecordTile extends StatefulWidget {
   final HabitRecord habitRecord;

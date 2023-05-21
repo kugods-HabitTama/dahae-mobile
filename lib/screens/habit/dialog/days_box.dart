@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:dahae_mobile/models/day_of_week.dart';
 
-import './day_button.dart';
+import 'package:dahae_mobile/data/enums/day_of_week.dart';
+import 'day_button.dart';
 
 class DaysBox extends StatefulWidget {
   final List<DayOfWeek> days;

@@ -1,14 +1,7 @@
-import 'dart:convert';
-
-import 'package:dahae_mobile/app.dart';
-import 'package:dahae_mobile/screens/habit/habit_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:go_router/go_router.dart';
 
-import '../../../api/api.dart';
+import 'package:dahae_mobile/data/api/api.dart';
 import 'package:dahae_mobile/screens/login/login_component.dart';
-import 'package:dahae_mobile/common/util/route_animation.dart';
 
 class SignUpNameScreen extends StatefulWidget {
   const SignUpNameScreen({

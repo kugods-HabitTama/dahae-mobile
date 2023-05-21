@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../models/user.dart';
-import 'profile_header_component.dart';
+import 'package:dahae_mobile/data/models/user.dart';
 
 class ProfileHeader extends StatefulWidget {
   final User userProfile;

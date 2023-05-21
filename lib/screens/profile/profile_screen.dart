@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../api/api.dart';
-import '../../models/user.dart';
+import 'package:dahae_mobile/data/models/user.dart';
+import 'package:dahae_mobile/data/api/api.dart';
 import 'profile_header.dart';
 import 'profile_setting.dart';
 import 'profile_component.dart';

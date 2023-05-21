@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'screens/screens.dart';
 
@@ -12,6 +13,13 @@ class DahaeApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // 화면 크기 설정
+    ScreenUtil.init(
+      context,
+      // design size in figma - iphone 14 pro
+      designSize: Size(390, 844),
+    );
+
     return MaterialApp.router(
       routerConfig: _router,
       theme: _theme,
@@ -41,7 +49,6 @@ class DahaeApp extends StatelessWidget {
         builder: (context, state) {
           return LogInScreen();
         },
-        //redirect: (_, __) => '/habit',
       ),
       GoRoute(
         path: '/habit',

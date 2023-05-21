@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
-import '../../models/day_of_week.dart';
+import 'package:dahae_mobile/data/enums/day_of_week.dart';
 
 // TODO: 클릭했을 때 달력이 만들어져서 보여야되고, 다시 클릭하면 원상복구됨.
 class CalenderHeader extends StatefulWidget {

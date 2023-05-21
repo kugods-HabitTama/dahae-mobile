@@ -1,8 +1,8 @@
-import 'package:dahae_mobile/models/habit.dart';
 import 'package:dio/dio.dart';
 import 'package:intl/intl.dart';
 
-import 'models/habit_response.dart';
+import 'package:dahae_mobile/data/models/api_models/habit_response.dart';
+import 'package:dahae_mobile/data/models/habit.dart';
 
 class HabitApi {
   const HabitApi(this._dio);
